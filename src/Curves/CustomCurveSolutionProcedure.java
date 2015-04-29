@@ -12,13 +12,15 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
 
     }
 
-    protected void DoSolve(CurveProblemDefinition aProblem) {
+    protected Boolean DoSolve(CurveProblemDefinition aProblem) {
+        Boolean res = false;
         try {
-            getClass().getMethod(aProblem.getMethodName()).invoke(this);
+            res = (Boolean)getClass().getMethod(aProblem.getMethodName()).invoke(this);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return res;
     }
 
     protected void DoEndSolve(CurveProblemDefinition aProblem) {
@@ -34,19 +36,27 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         return null;
     }
 
+    protected void addSolveProblem(CurveProblemDefinition aProblem) {
+        FSolveProblems.add(aProblem);
+    }
+
     public CustomCurveSolutionProcedure() {
         super();
         FSolveProblems = new ArrayList<CurveProblemDefinition>();
     }
 
-    public void Solve(CurveProblemDefinition aProblem) {
-        DoStartSolve(aProblem);
-        try {
-            DoSolve(aProblem);
+    public Boolean Solve(CurveProblemDefinition aProblem) {
+        Boolean res = canSolveProblem(aProblem);
+        if (res) {
+            DoStartSolve(aProblem);
+            try {
+                res = DoSolve(aProblem);
+            }
+            finally {
+                DoEndSolve(aProblem);
+            }
         }
-        finally {
-            DoEndSolve(aProblem);
-        }
+        return res;
     }
 
     public Boolean canSolveProblem(CurveProblemDefinition aProblem) {

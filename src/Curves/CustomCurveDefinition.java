@@ -11,6 +11,15 @@ public abstract class CustomCurveDefinition extends NGObject {
     protected String FFormula;
     protected ArrayList<CurveParameterDefinition> FParameters;
 
+    protected CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName) {
+        return addParameter(aKind, aName, "");
+    }
+
+    protected CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName, String aDescription) {
+        CurveParameterDefinition res = new CurveParameterDefinition(aKind, aName, aDescription);
+        return res;
+    }
+
     public CustomCurveDefinition(String aFormula) {
         this(aFormula, "");
     }
@@ -38,15 +47,6 @@ public abstract class CustomCurveDefinition extends NGObject {
 
     public String getFormula() {
         return FFormula;
-    }
-
-    public CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName) {
-        return addParameter(aKind, aName, "");
-    }
-
-    public CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName, String aDescription) {
-        CurveParameterDefinition res = new CurveParameterDefinition(aKind, aName, aDescription);
-        return res;
     }
 
     public CurveParameterDefinition getParameterDefintion(String aName) {
