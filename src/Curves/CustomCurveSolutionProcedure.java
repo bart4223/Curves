@@ -1,29 +1,50 @@
 package Curves;
 
 import Uniwork.Base.NGObject;
+import Uniwork.Misc.NGLogEntry;
+import Uniwork.Misc.NGLogManager;
 
 import java.util.ArrayList;
 
 public abstract class CustomCurveSolutionProcedure extends NGObject {
 
     protected ArrayList<CurveProblemDefinition> FSolveProblems;
+    protected NGLogManager FLogManager;
 
-    protected void DoStartSolve(CurveProblemDefinition aProblem) {
+    protected void writeInfo(String aInfo) {
+        if (FLogManager != null) {
+            FLogManager.writeLog(aInfo, NGLogEntry.LogType.Info);
+        }
+    }
+
+    protected void writeWarning(String aWarning) {
+        if (FLogManager != null) {
+            FLogManager.writeLog(aWarning, NGLogEntry.LogType.Warning);
+        }
+    }
+
+    protected void writeError(String aError) {
+        if (FLogManager != null) {
+            FLogManager.writeLog(aError, NGLogEntry.LogType.Error);
+        }
+    }
+
+    protected void DoStartSolveProblem(CurveProblemDefinition aProblem) {
 
     }
 
-    protected Boolean DoSolve(CurveProblemDefinition aProblem) {
+    protected Boolean DoSolveProblem(CurveProblemDefinition aProblem, CurveParameterValueList aValues) {
         Boolean res = false;
         try {
-            res = (Boolean)getClass().getMethod(aProblem.getMethodName()).invoke(this);
+            res = (Boolean)getClass().getMethod(aProblem.getMethodName(), CurveParameterValueList.class).invoke(this, aValues);
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            writeError(e.getMessage());
         }
         return res;
     }
 
-    protected void DoEndSolve(CurveProblemDefinition aProblem) {
+    protected void DoEndSolveProblem(CurveProblemDefinition aProblem) {
 
     }
 
@@ -36,31 +57,45 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         return null;
     }
 
-    protected void addSolveProblem(CurveProblemDefinition aProblem) {
-        FSolveProblems.add(aProblem);
+    protected void addSolveProblem(String aName, String aMethodName) {
+        addSolveProblem(aName, aMethodName, "");
+    }
+
+    protected void addSolveProblem(String aName, String aMethodName, String aDescription) {
+        CurveProblemDefinition problem = new CurveProblemDefinition(aName, aDescription, aMethodName);
+        FSolveProblems.add(problem);
     }
 
     public CustomCurveSolutionProcedure() {
         super();
         FSolveProblems = new ArrayList<CurveProblemDefinition>();
+        FLogManager = null;
     }
 
-    public Boolean Solve(CurveProblemDefinition aProblem) {
-        Boolean res = canSolveProblem(aProblem);
+    public Boolean SolveProblem(CurveProblemDefinition aProblem, CurveParameterValueList aValues) {
+        Boolean res = canSolveProblem(aProblem.getName());
         if (res) {
-            DoStartSolve(aProblem);
+            DoStartSolveProblem(aProblem);
             try {
-                res = DoSolve(aProblem);
+                res = DoSolveProblem(aProblem, aValues);
             }
             finally {
-                DoEndSolve(aProblem);
+                DoEndSolveProblem(aProblem);
             }
         }
         return res;
     }
 
-    public Boolean canSolveProblem(CurveProblemDefinition aProblem) {
-        return getSolveProblem(aProblem.getName()) != null;
+    public Boolean canSolveProblem(String aName) {
+        return getSolveProblem(aName) != null;
+    }
+
+    public void setLogManager(NGLogManager aLogManager) {
+        FLogManager = aLogManager;
+    }
+
+    public NGLogManager getLogManager() {
+        return FLogManager;
     }
 
 }
