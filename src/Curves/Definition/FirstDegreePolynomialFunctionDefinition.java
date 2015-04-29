@@ -1,4 +1,4 @@
-package Examples;
+package Curves.Definition;
 
 import Curves.CurveParameterDefinition;
 import Curves.CustomCurveDefinition;
