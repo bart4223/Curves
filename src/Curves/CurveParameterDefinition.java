@@ -6,15 +6,27 @@ import java.util.ArrayList;
 
 public class CurveParameterDefinition extends NGObject {
 
+    public enum Kind {Factor, X, Y}
+
     protected String FName;
     protected String FDescription;
-    protected ArrayList<CurveParameterDefinitionArea> FDefintionArea;
+    protected ArrayList<CurveParameterDefinitionArea> FDefintionAreas;
+    protected Kind FKind;
 
-    public CurveParameterDefinition(String aName, String aDescription) {
+    public CurveParameterDefinition(Kind aKind, String aName) {
+        this(aKind, aName, "");
+    }
+
+    public CurveParameterDefinition(Kind aKind, String aName, String aDescription) {
         super();
+        FKind = aKind;
         FName = aName;
         FDescription = aDescription;
-        FDefintionArea = new ArrayList<CurveParameterDefinitionArea>();
+        FDefintionAreas = new ArrayList<CurveParameterDefinitionArea>();
+    }
+
+    public Kind getKind() {
+        return FKind;
     }
 
     public String getName() {
@@ -27,7 +39,7 @@ public class CurveParameterDefinition extends NGObject {
 
     public void addDefinitionArea(double aMin, double aMax) {
         CurveParameterDefinitionArea area = new CurveParameterDefinitionArea(aMin, aMax);
-        FDefintionArea.add(area);
+        FDefintionAreas.add(area);
 
     }
 

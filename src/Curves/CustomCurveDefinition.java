@@ -1,0 +1,61 @@
+package Curves;
+
+import Uniwork.Base.NGObject;
+
+import java.util.ArrayList;
+
+public abstract class CustomCurveDefinition extends NGObject {
+
+    protected String FName;
+    protected String FDescription;
+    protected String FFormula;
+    protected ArrayList<CurveParameterDefinition> FParameters;
+
+    public CustomCurveDefinition(String aFormula) {
+        this(aFormula, "");
+    }
+
+    public CustomCurveDefinition(String aFormula, String aName) {
+        this(aFormula, aName, "");
+    }
+
+    public CustomCurveDefinition(String aFormula, String aName, String aDescription) {
+        super();
+        FResolver = null;
+        FName = aName;
+        FDescription = aDescription;
+        FFormula = aFormula;
+        FParameters = new ArrayList<CurveParameterDefinition>();
+    }
+
+    public String getName() {
+        return FName;
+    }
+
+    public String getDescription() {
+        return FDescription;
+    }
+
+    public String getFormula() {
+        return FFormula;
+    }
+
+    public CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName) {
+        return addParameter(aKind, aName, "");
+    }
+
+    public CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName, String aDescription) {
+        CurveParameterDefinition res = new CurveParameterDefinition(aKind, aName, aDescription);
+        return res;
+    }
+
+    public CurveParameterDefinition getParameterDefintion(String aName) {
+        for (CurveParameterDefinition parameter : FParameters) {
+            if (parameter.getName().equals(aName)) {
+                return parameter;
+            }
+        }
+        return null;
+    }
+
+}
