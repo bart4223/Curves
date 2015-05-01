@@ -1,5 +1,5 @@
 # Curves
-Curves is a project to visualize some graphs...
+Curves is a project to visualize and animate some mathematical functions.
 
 Version history
 ===============
