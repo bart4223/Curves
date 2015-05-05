@@ -3,8 +3,10 @@ package Curves;
 import Uniwork.Base.NGObject;
 import Uniwork.Misc.NGLogEntry;
 import Uniwork.Misc.NGLogManager;
+import Uniwork.Misc.NGStrings;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class CustomCurveSolutionProcedure extends NGObject {
 
@@ -29,22 +31,25 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         }
     }
 
-    protected void DoStartSolveProblem(CurveProblemDefinition aProblem) {
+    protected void DoStartSolveProblem(String aProblemName) {
 
     }
 
-    protected Boolean DoSolveProblem(CurveProblemDefinition aProblem, CurveParameterValueList aValues) {
-        Boolean res = false;
-        try {
-            res = (Boolean)getClass().getMethod(aProblem.getMethodName(), CurveParameterValueList.class).invoke(this, aValues);
-        }
-        catch (Exception e) {
-            writeError(e.getMessage());
+    protected Boolean DoSolveProblem(String aProblemName, CurveParameterValueList aValues) {
+        CurveProblemDefinition problem = getSolveProblem(aProblemName);
+        Boolean res = problem != null;
+        if (res) {
+            try {
+                getClass().getMethod(problem.getMethodName(), CurveParameterValueList.class).invoke(this, aValues);
+            }
+            catch (Exception e) {
+                writeError(e.getMessage());
+            }
         }
         return res;
     }
 
-    protected void DoEndSolveProblem(CurveProblemDefinition aProblem) {
+    protected void DoEndSolveProblem(String aProblemName) {
 
     }
 
@@ -62,7 +67,7 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
     }
 
     protected void addSolveProblem(String aName, String aMethodName, String aDescription) {
-        CurveProblemDefinition problem = new CurveProblemDefinition(aName, aDescription, aMethodName);
+        CurveProblemDefinition problem = new CurveProblemDefinition(aName, aMethodName, aDescription);
         FSolveProblems.add(problem);
     }
 
@@ -72,15 +77,15 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         FLogManager = null;
     }
 
-    public Boolean SolveProblem(CurveProblemDefinition aProblem, CurveParameterValueList aValues) {
-        Boolean res = canSolveProblem(aProblem.getName());
+    public Boolean SolveProblem(String aProblemName, CurveParameterValueList aValues) {
+        Boolean res = canSolveProblem(aProblemName);
         if (res) {
-            DoStartSolveProblem(aProblem);
+            DoStartSolveProblem(aProblemName);
             try {
-                res = DoSolveProblem(aProblem, aValues);
+                res = DoSolveProblem(aProblemName, aValues);
             }
             finally {
-                DoEndSolveProblem(aProblem);
+                DoEndSolveProblem(aProblemName);
             }
         }
         return res;
@@ -96,6 +101,18 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
 
     public NGLogManager getLogManager() {
         return FLogManager;
+    }
+
+    public String getSolveProblemsAsString() {
+        String res = "";
+        for (CurveProblemDefinition problem : FSolveProblems) {
+            res = NGStrings.addString(res, problem.getName(), ",");
+        }
+        return res;
+    }
+
+    public Iterator<CurveProblemDefinition> getProblems() {
+        return FSolveProblems.iterator();
     }
 
 }

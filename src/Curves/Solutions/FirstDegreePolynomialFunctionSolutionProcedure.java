@@ -16,6 +16,7 @@ public class FirstDegreePolynomialFunctionSolutionProcedure extends CustomCurveS
         double b = aValues.getValue("b");
         double y = a * x + b;
         aValues.setValue("y", y);
+        writeInfo(String.format("x=%f y=%f", x, y));
     }
 
 }

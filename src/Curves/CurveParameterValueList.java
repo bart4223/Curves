@@ -15,4 +15,5 @@ public class CurveParameterValueList extends NGPropertyList {
     public void setValue(String aName, double aValue) {
         set(aName, aValue);
     }
+
 }

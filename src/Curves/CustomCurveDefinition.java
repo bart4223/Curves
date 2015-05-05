@@ -3,6 +3,7 @@ package Curves;
 import Uniwork.Base.NGObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class CustomCurveDefinition extends NGObject {
 
@@ -56,6 +57,10 @@ public abstract class CustomCurveDefinition extends NGObject {
             }
         }
         return null;
+    }
+
+    public Iterator<CurveParameterDefinition> getParameters() {
+        return FParameters.iterator();
     }
 
 }

@@ -3,6 +3,7 @@ package Curves;
 import Uniwork.Base.NGObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CurveParameterDefinition extends NGObject {
 
@@ -40,7 +41,10 @@ public class CurveParameterDefinition extends NGObject {
     public void addDefinitionArea(double aMin, double aMax) {
         CurveParameterDefinitionArea area = new CurveParameterDefinitionArea(aMin, aMax);
         FDefintionAreas.add(area);
+    }
 
+    public Iterator<CurveParameterDefinitionArea> getDefinitionAreas() {
+        return FDefintionAreas.iterator();
     }
 
 }
