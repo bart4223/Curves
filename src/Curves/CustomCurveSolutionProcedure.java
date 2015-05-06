@@ -40,7 +40,7 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         Boolean res = problem != null;
         if (res) {
             try {
-                getClass().getMethod(problem.getMethodName(), CurveParameterValueList.class).invoke(this, aValues);
+                getClass().getMethod(problem.getSolveMethodName(), CurveParameterValueList.class).invoke(this, aValues);
             }
             catch (Exception e) {
                 writeError(e.getMessage());

@@ -6,16 +6,16 @@ public class CurveProblemDefinition extends NGObject {
 
     protected String FName;
     protected String FDescription;
-    protected String FMethodName;
+    protected String FSolveMethodName;
 
-    public CurveProblemDefinition(String aName, String aMethodName) {
-        this(aName, aMethodName, "");
+    public CurveProblemDefinition(String aName, String aSolveMethodName) {
+        this(aName, aSolveMethodName, "");
     }
 
-    public CurveProblemDefinition(String aName, String aMethodName, String aDescription) {
+    public CurveProblemDefinition(String aName, String aSolveMethodName, String aDescription) {
         super();
         FName = aName;
-        FMethodName = aMethodName;
+        FSolveMethodName = aSolveMethodName;
         FDescription = aDescription;
     }
 
@@ -27,8 +27,8 @@ public class CurveProblemDefinition extends NGObject {
         return FDescription;
     }
 
-    public String getMethodName() {
-        return FMethodName;
+    public String getSolveMethodName() {
+        return FSolveMethodName;
     }
 
 }

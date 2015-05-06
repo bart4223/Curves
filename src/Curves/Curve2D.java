@@ -12,16 +12,17 @@ public class Curve2D extends CustomCurve {
 
     @Override
     protected void DoAfterCalculate(String aProblemName) {
-        if (aProblemName.equals("VALUE1")) {
+        if (aProblemName.equals("VALUE")) {
             double x = FSolveParameterValues.getValue("x");
             double y = FSolveParameterValues.getValue("y");
             FPoints.add(new NGPoint2D(x, y));
+            writeInfo(String.format("New 2D-Point(%f/%f) added in value list (size %d)", x, y, FPoints.size()));
         }
         super.DoAfterCalculate(aProblemName);
     }
 
-    public Curve2D(CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
-        super(aDefinition, aSolutionProcedure);
+    public Curve2D(CurveManager aCurveManager, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
+        super(aCurveManager, aDefinition, aSolutionProcedure);
         FLineColor = Color.BLUE;
         FPoints = new ArrayList<NGPoint2D>();
     }
