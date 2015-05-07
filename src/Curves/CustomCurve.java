@@ -14,37 +14,54 @@ public abstract class CustomCurve extends NGObject {
     protected CurveParameterValueList FSolveParameterValues;
     protected CurveManager FCurveManager;
     protected NGLogManager FLogManager;
+    protected String FName;
 
     protected void writeInfo(String aInfo) {
         if (FLogManager != null) {
-            FLogManager.writeLog(aInfo, NGLogEntry.LogType.Info);
+            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aInfo), NGLogEntry.LogType.Info);
         }
     }
 
     protected void writeWarning(String aWarning) {
         if (FLogManager != null) {
-            FLogManager.writeLog(aWarning, NGLogEntry.LogType.Warning);
+            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aWarning), NGLogEntry.LogType.Warning);
         }
     }
 
     protected void writeError(String aError) {
         if (FLogManager != null) {
-            FLogManager.writeLog(aError, NGLogEntry.LogType.Error);
+            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aError), NGLogEntry.LogType.Error);
         }
     }
 
-
     protected void BeforeCalculate(String aProblemName) {
-        FSolveParameterValues.AssignFrom(FParameterValues);
-        DoBeforeCalculate(aProblemName);
+
     }
 
     protected void DoBeforeCalculate(String aProblemName) {
+        FSolveParameterValues.AssignFrom(FParameterValues);
+    }
 
+    protected CurveProblemDefinition getSolveProblem(String aProblemName) {
+        return FSolutionProcedure.getSolveProblem(aProblemName);
     }
 
     protected void InternalCalculate(String aProblemName) {
-        DoCalculate(aProblemName);
+        switch (getSolveProblem(aProblemName).getKind()) {
+            case Value:
+                CurveParameterDefinition param = FDefinition.getParameterDefintion(CurveParameterDefinition.Kind.X);
+                Iterator<CurveParameterDefinitionArea> itr = param.getDefinitionAreas();
+                while (itr.hasNext()) {
+                    CurveParameterDefinitionArea area = itr.next();
+                    for (double x = area.getMin(); x <= area.getMax(); x = x + 1.0) {
+                        DoBeforeCalculate(aProblemName);
+                        setSolveParameterValue(param.getName(), x);
+                        //System.out.println(FSolveParameterValues.size());
+                        DoCalculate(aProblemName);
+                        DoAfterCalculate(aProblemName);
+                    }
+                }
+        }
     }
 
     protected void DoCalculate(String aProblemName) {
@@ -52,16 +69,25 @@ public abstract class CustomCurve extends NGObject {
     }
 
     protected void AfterCalculate(String aProblemName) {
-        DoAfterCalculate(aProblemName);
+
     }
 
     protected void DoAfterCalculate(String aProblemName) {
 
     }
 
-    public CustomCurve(CurveManager aCurveManager, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
+    protected void setSolveParameterValue(String aName, double aValue) {
+        FSolveParameterValues.setValue(aName, aValue);
+    }
+
+    protected double getSolveParameterValue(String aName) {
+        return FSolveParameterValues.getValue(aName);
+    }
+
+    public CustomCurve(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
         super();
         FCurveManager = aCurveManager;
+        FName = aName;
         if (FCurveManager != null) {
             FLogManager = FCurveManager.getLogManager();
         }
@@ -73,6 +99,10 @@ public abstract class CustomCurve extends NGObject {
 
     public CurveManager getCurveManager() {
         return FCurveManager;
+    }
+
+    public String getName() {
+        return FName;
     }
 
     public CustomCurveDefinition getDefinition() {
@@ -100,7 +130,7 @@ public abstract class CustomCurve extends NGObject {
         }
     }
 
-    public void setParamterValue(String aName, double aValue) {
+    public void setParameterValue(String aName, double aValue) {
         FParameterValues.setValue(aName, aValue);
     }
 

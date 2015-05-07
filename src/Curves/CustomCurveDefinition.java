@@ -18,6 +18,7 @@ public abstract class CustomCurveDefinition extends NGObject {
 
     protected CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName, String aDescription) {
         CurveParameterDefinition res = new CurveParameterDefinition(aKind, aName, aDescription);
+        FParameters.add(res);
         return res;
     }
 
@@ -53,6 +54,15 @@ public abstract class CustomCurveDefinition extends NGObject {
     public CurveParameterDefinition getParameterDefintion(String aName) {
         for (CurveParameterDefinition parameter : FParameters) {
             if (parameter.getName().equals(aName)) {
+                return parameter;
+            }
+        }
+        return null;
+    }
+
+    public CurveParameterDefinition getParameterDefintion(CurveParameterDefinition.Kind aKind) {
+        for (CurveParameterDefinition parameter : FParameters) {
+            if (parameter.getKind() == aKind) {
                 return parameter;
             }
         }

@@ -62,12 +62,12 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
         return null;
     }
 
-    protected void addSolveProblem(String aName, String aMethodName) {
-        addSolveProblem(aName, aMethodName, "");
+    protected void addSolveProblem(CurveProblemDefinition.Kind aKind, String aName, String aMethodName) {
+        addSolveProblem(aKind, aName, aMethodName, "");
     }
 
-    protected void addSolveProblem(String aName, String aMethodName, String aDescription) {
-        CurveProblemDefinition problem = new CurveProblemDefinition(aName, aMethodName, aDescription);
+    protected void addSolveProblem(CurveProblemDefinition.Kind aKind, String aName, String aMethodName, String aDescription) {
+        CurveProblemDefinition problem = new CurveProblemDefinition(aKind, aName, aMethodName, aDescription);
         FSolveProblems.add(problem);
     }
 

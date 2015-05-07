@@ -17,11 +17,10 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         // ToDo load from curve composition
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
-        Curve2D curve = new Curve2D(this, new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, 0, 10), proc);
+        Curve2D curve = new Curve2D(this, "FIRST", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, 0, 100), proc);
         addCurve(curve);
-        curve.setParamterValue("a", 1.0);
-        curve.setParamterValue("b", 0.0);
-        curve.setParamterValue("x", 0.0);
+        curve.setParameterValue("a", 1.0);
+        curve.setParameterValue("b", 0.0);
     }
 
     protected void CalculateCurves() {
@@ -55,7 +54,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     public void addCurve(CustomCurve aCurve) {
         FCurves.add(aCurve);
-        writeInfo(String.format("Curve Definition [%s -> %s] with solution procedures [%s] added", aCurve.getDefinition().getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
+        writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getDefinition().getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
     }
 
     @Override

@@ -1,13 +1,14 @@
 package Curves.Solutions;
 
 import Curves.CurveParameterValueList;
+import Curves.CurveProblemDefinition;
 import Curves.CustomCurveSolutionProcedure;
 
 public class FirstDegreePolynomialFunctionSolutionProcedure extends CustomCurveSolutionProcedure {
 
     public FirstDegreePolynomialFunctionSolutionProcedure() {
         super();
-        addSolveProblem("VALUE", "SolveProblemValue");
+        addSolveProblem(CurveProblemDefinition.Kind.Value, "Value", "SolveProblemValue");
     }
 
     public void SolveProblemValue(CurveParameterValueList aValues) {
