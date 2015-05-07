@@ -11,3 +11,4 @@ Version history
     28.04.15    Curve solution procedure
     01.05.15    Custom Curve and Curve composition
     05.05.15    First curve evaluation
+    07.05.15    2D-Curve value calculation works
