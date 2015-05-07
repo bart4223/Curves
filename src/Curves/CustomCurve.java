@@ -56,7 +56,6 @@ public abstract class CustomCurve extends NGObject {
                     for (double x = area.getMin(); x <= area.getMax(); x = x + 1.0) {
                         DoBeforeCalculate(aProblemName);
                         setSolveParameterValue(param.getName(), x);
-                        //System.out.println(FSolveParameterValues.size());
                         DoCalculate(aProblemName);
                         DoAfterCalculate(aProblemName);
                     }
