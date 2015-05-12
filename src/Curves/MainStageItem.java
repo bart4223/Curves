@@ -1,5 +1,6 @@
 package Curves;
 
+import Uniwork.Appl.NGApplication;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Base.NGComponent;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ public class MainStageItem extends NGCustomStageItem {
         super.LoadStage();
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainStage.fxml"));
-            FStage.setTitle("Curves");
+            FStage.setTitle(String.format("%s.%s", NGApplication.Application.getName(), getName()));
             FStage.setScene(new Scene(root, 500, 50));
             FStage.show();
         }
@@ -24,8 +25,8 @@ public class MainStageItem extends NGCustomStageItem {
 
     }
 
-    public MainStageItem(NGComponent aOwner, Stage aStage) {
-        super(aOwner, aStage);
+    public MainStageItem(NGComponent aOwner, String aName, Stage aStage) {
+        super(aOwner, aName, aStage);
     }
 
 }

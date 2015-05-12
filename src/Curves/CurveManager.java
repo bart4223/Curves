@@ -17,7 +17,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         // ToDo load from curve composition
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
-        Curve2D curve = new Curve2D(this, "FIRST", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, 0, 100), proc);
+        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, 0, 100), proc);
         addCurve(curve);
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);

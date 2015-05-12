@@ -18,8 +18,8 @@ public class CurveStageItem extends NGCustomStageItem {
         super.DoFinalize();
     }
 
-    public CurveStageItem(NGComponent aOwner, Stage aStage) {
-        super(aOwner, aStage);
+    public CurveStageItem(NGComponent aOwner, String aName, Stage aStage) {
+        super(aOwner, aName, aStage);
         FCurveManager = new CurveManager(this);
         FCurveManager.setLogManager(FLogManager);
     }

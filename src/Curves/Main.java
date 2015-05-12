@@ -7,10 +7,10 @@ public class Main extends NGApplication {
     @Override
     public void DoBeforeInitialize() {
         super.DoBeforeInitialize();
-        FStageManager.registerItemClass("MAIN", "Curves.MainStageItem");
-        FStageManager.registerItemClass("CURVE", "Curves.CurveStageItem");
-        FStageManager.addStageItem("MAIN", FPrimaryStage);
-        FStageManager.addStageItem("CURVE");
+        FStageManager.registerItemClass("Main", "Curves.MainStageItem");
+        FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
+        FStageManager.addStageItem("Main", FPrimaryStage);
+        FStageManager.addStageItem("Curve");
     }
 
     public Main() {
