@@ -22,3 +22,4 @@ Version history
     01.05.15    Custom Curve and Curve composition
     05.05.15    First curve evaluation
     07.05.15    2D-Curve value calculation works
+    12.05.15    Curves works with new NGApplication

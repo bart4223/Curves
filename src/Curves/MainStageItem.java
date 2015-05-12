@@ -15,7 +15,7 @@ public class MainStageItem extends NGCustomStageItem {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainStage.fxml"));
             FStage.setTitle("Curves");
-            FStage.setScene(new Scene(root, 500, 100));
+            FStage.setScene(new Scene(root, 500, 50));
             FStage.show();
         }
         catch (Exception e) {
