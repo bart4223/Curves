@@ -2,6 +2,7 @@ package Curves.Solutions;
 
 import Curves.CurveParameterValueList;
 import Curves.CurveProblemDefinition;
+import Curves.CurvesConsts;
 import Curves.CustomCurveSolutionProcedure;
 
 public class FirstDegreePolynomialFunctionSolutionProcedure extends CustomCurveSolutionProcedure {
@@ -17,7 +18,7 @@ public class FirstDegreePolynomialFunctionSolutionProcedure extends CustomCurveS
         double b = aValues.getValue("b");
         double y = a * x + b;
         aValues.setValue("y", y);
-        writeInfo(String.format("x=%f y=%f", x, y));
+        writeInfo(CurvesConsts.C_DEBUGLEVEL_SOLVEPROBLEM, String.format("x=%f y=%f", x, y));
     }
 
 }

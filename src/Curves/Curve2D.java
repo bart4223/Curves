@@ -11,12 +11,12 @@ public class Curve2D extends CustomCurve {
     protected ArrayList<NGPoint2D> FPoints;
 
     @Override
-    protected void BeforeCalculate(String aProblemName) {
-        super.BeforeCalculate(aProblemName);
+    protected void BeforeInternalCalculate(String aProblemName) {
+        super.BeforeInternalCalculate(aProblemName);
         switch (FSolutionProcedure.getSolveProblem(aProblemName).getKind()) {
             case Value:
                 FPoints.clear();
-                writeInfo(String.format("Value list cleared (size %d)", FPoints.size()));
+                writeInfo(CurvesConsts.C_DEBUGLEVEL_SOLVEPROBLEM, String.format("Value list cleared (Points %d)", FPoints.size()));
         }
     }
 
@@ -27,10 +27,19 @@ public class Curve2D extends CustomCurve {
                 double x = FSolveParameterValues.getValue("x");
                 double y = FSolveParameterValues.getValue("y");
                 FPoints.add(new NGPoint2D(x, y));
-                writeInfo(String.format("New 2D-Point(%f/%f) added in value list (size %d)", x, y, FPoints.size()));
+                writeInfo(CurvesConsts.C_DEBUGLEVEL_SOLVEPROBLEM, String.format("New 2D-Point(%f/%f) added in value list (size %d)", x, y, FPoints.size()));
                 break;
         }
         super.DoAfterCalculate(aProblemName);
+    }
+
+    @Override
+    protected void AfterInternalCalculate(String aProblemName) {
+        super.AfterInternalCalculate(aProblemName);
+        switch (FSolutionProcedure.getSolveProblem(aProblemName).getKind()) {
+            case Value:
+                writeInfo(String.format("Value list with points count %d", FPoints.size()));
+        }
     }
 
     public Curve2D(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {

@@ -17,33 +17,37 @@ public abstract class CustomCurve extends NGObject {
     protected String FName;
 
     protected void writeInfo(String aInfo) {
+        writeInfo(0, aInfo);
+    }
+
+    protected void writeInfo(int aLogLevel, String aInfo) {
         if (FLogManager != null) {
-            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aInfo), NGLogEntry.LogType.Info);
+            FLogManager.writeLog(aLogLevel, String.format("Curve %s: %s", getName(), aInfo), NGLogEntry.LogType.Info, toString());
         }
     }
 
     protected void writeWarning(String aWarning) {
         if (FLogManager != null) {
-            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aWarning), NGLogEntry.LogType.Warning);
+            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aWarning), NGLogEntry.LogType.Warning, toString());
         }
     }
 
     protected void writeError(String aError) {
         if (FLogManager != null) {
-            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aError), NGLogEntry.LogType.Error);
+            FLogManager.writeLog(String.format("Curve %s: %s", getName(), aError), NGLogEntry.LogType.Error, toString());
         }
     }
 
-    protected void BeforeCalculate(String aProblemName) {
+    protected void BeforeInternalCalculate(String aProblemName) {
 
-    }
-
-    protected void DoBeforeCalculate(String aProblemName) {
-        FSolveParameterValues.AssignFrom(FParameterValues);
     }
 
     protected CurveProblemDefinition getSolveProblem(String aProblemName) {
         return FSolutionProcedure.getSolveProblem(aProblemName);
+    }
+
+    protected void DoBeforeCalculate(String aProblemName) {
+        FSolveParameterValues.AssignFrom(FParameterValues);
     }
 
     protected void InternalCalculate(String aProblemName) {
@@ -55,9 +59,12 @@ public abstract class CustomCurve extends NGObject {
                     CurveParameterDefinitionArea area = itr.next();
                     for (double x = area.getMin(); x <= area.getMax(); x = x + 1.0) {
                         DoBeforeCalculate(aProblemName);
-                        setSolveParameterValue(param.getName(), x);
-                        DoCalculate(aProblemName);
-                        DoAfterCalculate(aProblemName);
+                        try {
+                            setSolveParameterValue(param.getName(), x);
+                            DoCalculate(aProblemName);
+                        } finally {
+                            DoAfterCalculate(aProblemName);
+                        }
                     }
                 }
         }
@@ -67,11 +74,11 @@ public abstract class CustomCurve extends NGObject {
         FSolutionProcedure.SolveProblem(aProblemName, FSolveParameterValues);
     }
 
-    protected void AfterCalculate(String aProblemName) {
+    protected void DoAfterCalculate(String aProblemName) {
 
     }
 
-    protected void DoAfterCalculate(String aProblemName) {
+    protected void AfterInternalCalculate(String aProblemName) {
 
     }
 
@@ -113,11 +120,11 @@ public abstract class CustomCurve extends NGObject {
     }
 
     public void Calculate(String aProblemName) {
-        BeforeCalculate(aProblemName);
+        BeforeInternalCalculate(aProblemName);
         try {
             InternalCalculate(aProblemName);
         } finally {
-            AfterCalculate(aProblemName);
+            AfterInternalCalculate(aProblemName);
         }
     }
 

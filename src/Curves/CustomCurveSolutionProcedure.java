@@ -14,8 +14,12 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
     protected NGLogManager FLogManager;
 
     protected void writeInfo(String aInfo) {
+        writeInfo(0, aInfo);
+    }
+
+    protected void writeInfo(int aLogLevel, String aInfo) {
         if (FLogManager != null) {
-            FLogManager.writeLog(aInfo, NGLogEntry.LogType.Info);
+            FLogManager.writeLog(aLogLevel, aInfo, NGLogEntry.LogType.Info);
         }
     }
 

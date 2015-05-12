@@ -3,6 +3,16 @@ Curves
 
 Curves is a project to visualize and animate some mathematical functions.
 
+
+Configuration
+===============
+
+    File /resources/config.ccf:
+        
+        Debuglevel = Debugger level >= 0
+        ConsoleShowLogEntrySource = Show the source of log entry
+        ConsoleShowLog = Show the log entries in console
+
 Version history
 ===============
 

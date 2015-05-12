@@ -1,25 +1,22 @@
 package Curves;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Uniwork.Appl.NGApplication;
 
-public class Main extends Application {
-
-    protected CurveStageManager FStageManager;
+public class Main extends NGApplication {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("CurveStage.fxml"));
-        primaryStage.setTitle("Curves");
-        primaryStage.setScene(new Scene(root, 300, 275));
-        primaryStage.show();
-        // ToDo
-        FStageManager = new CurveStageManager();
-        FStageManager.newStage();
-        FStageManager.Initialize();
+    public void DoBeforeInitialize() {
+        super.DoBeforeInitialize();
+        FStageManager.registerItemClass("MAIN", "Curves.MainStageItem");
+        FStageManager.registerItemClass("CURVE", "Curves.CurveStageItem");
+        FStageManager.addStageItem("MAIN", FPrimaryStage);
+        FStageManager.addStageItem("CURVE");
+    }
+
+    public Main() {
+        super();
+        FName = "Curves";
+        FConfigurationFilename = "resources/config.ccf";
     }
 
     public static void main(String[] args) {
