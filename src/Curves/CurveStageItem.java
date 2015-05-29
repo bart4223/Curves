@@ -1,7 +1,7 @@
 package Curves;
 
 import Uniwork.Appl.NGCustomStageItem;
-import Uniwork.Base.NGComponent;
+import Uniwork.Appl.NGStageManager;
 import javafx.stage.Stage;
 
 public class CurveStageItem extends NGCustomStageItem {
@@ -18,8 +18,8 @@ public class CurveStageItem extends NGCustomStageItem {
         super.DoFinalize();
     }
 
-    public CurveStageItem(NGComponent aOwner, String aName, Stage aStage) {
-        super(aOwner, aName, aStage);
+    public CurveStageItem(NGStageManager aStageManager, String aName, Stage aStage) {
+        super(aStageManager, aName, aStage);
         FCurveManager = new CurveManager(this);
         FCurveManager.setLogManager(FLogManager);
     }

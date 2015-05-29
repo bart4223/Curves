@@ -23,3 +23,4 @@ Version history
     05.05.15    First curve evaluation
     07.05.15    2D-Curve value calculation works
     12.05.15    Curves works with new NGApplication
+    29.05.15    Built-In Application module
