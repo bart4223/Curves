@@ -9,19 +9,25 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class MainStageItem extends NGCustomStageItem {
+public class CurveControlStageItem extends NGCustomStageItem {
+
+    @Override
+    protected void CreateStage() {
+        super.CreateStage();
+        FStage = new Stage();
+    }
 
     @Override
     protected void LoadStage() {
         super.LoadStage();
         FXMLLoader lXMLLoader;
-        lXMLLoader = new FXMLLoader(getClass().getResource("MainStage.fxml"));
+        lXMLLoader = new FXMLLoader(getClass().getResource("CurveControlStage.fxml"));
         try {
             lXMLLoader.load();
             FStageController = lXMLLoader.getController();
             Parent lRoot = lXMLLoader.getRoot();
             FStage.setTitle(String.format("%s.%s", NGApplication.Application.getName(), getCaption()));
-            Scene Scene = new Scene(lRoot, 500, 50, Color.LIGHTGRAY);
+            Scene Scene = new Scene(lRoot, 800, 50, Color.LIGHTGRAY);
             FStage.setScene(Scene);
             FStage.setResizable(false);
         }
@@ -30,7 +36,7 @@ public class MainStageItem extends NGCustomStageItem {
         }
     }
 
-    public MainStageItem(NGStageManager aStageManager, String aName, Stage aStage) {
+    public CurveControlStageItem(NGStageManager aStageManager, String aName, Stage aStage) {
         super(aStageManager, aName, aStage);
     }
 

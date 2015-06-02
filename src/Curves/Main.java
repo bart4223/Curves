@@ -9,7 +9,6 @@ public class Main extends NGApplication {
         super.DoBeforeInitialize();
         MainApplicationModule main = (MainApplicationModule)FModuleManager.addModule(MainApplicationModule.class, "Main");
         main.setPrimaryStage(FPrimaryStage);
-        FModuleManager.addModule(CurveApplicationModule.class, "One");
     }
 
     public Main() {

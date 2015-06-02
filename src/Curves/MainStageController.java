@@ -12,6 +12,11 @@ public class MainStageController extends NGStageController {
         NGApplication.Application.Terminate();
     }
 
+    @FXML
+    protected void handleAdd(){
+        NGApplication.Application.addModule(CurveApplicationModule.class, true);
+    }
+
     public MainStageController() {
         this(null);
     }
