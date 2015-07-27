@@ -23,10 +23,32 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         curve.setParameterValue("b", 0.0);
     }
 
-    protected void CalculateCurves() {
+    protected void DoCalculateCurve(CustomCurve aCurve) {
+        aCurve.Calculate();
+    }
+
+    protected void DoCalculateCurves() {
         for (CustomCurve curve : FCurves) {
-            curve.Calculate();
+            DoCalculateCurve(curve);
         }
+    }
+
+    protected void BeginCalculateCurves() {
+
+    }
+
+    protected void CalculateCurves() {
+        BeginCalculateCurves();
+        try {
+            DoCalculateCurves();
+        }
+        finally {
+            EndCalculateCurves();
+        }
+    }
+
+    protected void EndCalculateCurves() {
+
     }
 
     @Override
@@ -37,8 +59,8 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     @Override
     protected void DoAfterInitialize() {
-        CalculateCurves();
         super.DoAfterInitialize();
+        CalculateCurves();
     }
 
     public CurveManager() {

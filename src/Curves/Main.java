@@ -11,6 +11,12 @@ public class Main extends NGApplication {
         main.setPrimaryStage(FPrimaryStage);
     }
 
+    @Override
+    protected void registerObjectRequests() {
+        super.registerObjectRequests();
+        registerObjectRequest("Application", this, "addCurveModule", "addCurveModule");
+    }
+
     public Main() {
         super();
         FName = "Curves";
@@ -20,6 +26,10 @@ public class Main extends NGApplication {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void addCurveModule() {
+        addModule(CurveApplicationModule.class, true);
     }
 
 }

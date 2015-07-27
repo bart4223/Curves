@@ -8,13 +8,13 @@ import javafx.fxml.FXML;
 public class MainStageController extends NGStageController {
 
     @FXML
-    protected void handleQuit(){
-        NGApplication.Application.Terminate();
+    protected void handleQuit() {
+        NGApplication.Application.Invoke("Application", "Quit");
     }
 
     @FXML
     protected void handleAdd(){
-        NGApplication.Application.addModule(CurveApplicationModule.class, true);
+        NGApplication.Application.Invoke("Application", "addCurveModule");
     }
 
     public MainStageController() {

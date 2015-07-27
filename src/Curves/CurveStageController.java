@@ -13,6 +13,9 @@ public class CurveStageController extends NGStageController {
     @FXML
     private Canvas Layer0;
 
+    @FXML
+    private Canvas Layer1;
+
     @Override
     protected void CreateDisplayController() {
         super.CreateDisplayController();
@@ -21,6 +24,7 @@ public class CurveStageController extends NGStageController {
         dcgrid.setView(dv);
         dcgrid.GridDistance = 20;
         dcgrid.GridColor = Color.DARKGRAY;
+        dcgrid.AlternateGridColor = false;
         registerDisplayController(dcgrid);
     }
 
@@ -30,7 +34,6 @@ public class CurveStageController extends NGStageController {
 
     public CurveStageController(NGCustomStageItem aStageItem) {
         super(aStageItem);
-
     }
 
 }

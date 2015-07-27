@@ -2,4 +2,5 @@
 <?import javafx.scene.canvas.Canvas?>
 <AnchorPane fx:controller="Curves.CurveStageController" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: white;">
     <Canvas id="Layer0" height="800" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" fx:id="Layer0" />
+    <Canvas id="Layer1" height="800" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" fx:id="Layer1" />
 </AnchorPane>
