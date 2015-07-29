@@ -3,6 +3,7 @@ package Curves;
 import Curves.Definitions.FirstDegreePolynomialFunctionDefinition;
 import Curves.Solutions.FirstDegreePolynomialFunctionSolutionProcedure;
 import Uniwork.Base.NGComponent;
+import Uniwork.Base.NGComponentManager;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
@@ -64,11 +65,15 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
     }
 
     public CurveManager() {
-        this(null);
+        this("");
     }
 
-    public CurveManager(NGComponent aOwner) {
-        super(aOwner);
+    public CurveManager(String aName) {
+        this(null, aName);
+    }
+
+    public CurveManager(NGComponent aOwner, String aName) {
+        super(aOwner, aName);
         FCurves = new ArrayList<CustomCurve>();
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);

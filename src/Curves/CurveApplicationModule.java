@@ -19,7 +19,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     public CurveApplicationModule(NGComponent aOwner, String aName, String aDescription) {
         super(aOwner, aName, aDescription);
-        FComponentManager.registerComponent(new CurveManager(this));
+        FComponentManager.registerComponent(new CurveManager(this, "CurveManager"));
         FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
         FStageManager.registerItemClass("Control", "Curves.CurveControlStageItem");
     }
