@@ -15,7 +15,11 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         item = FStageManager.addStageItem("Curve");
         item.setCaption(String.format("%s.Curve", FName));
         item.setPosition(1500, 300);
-        getCurveManager().addEventListener((CurveStageItem) item);
+        getCurveManager().addEventListener((CurveStageItem)item);
+        item = FStageManager.addStageItem("Console");
+        item.setCaption(String.format("%s.Console", FName));
+        item.setPosition(1500, 1150);
+        getCurveManager().addEventListener((CurveConsoleStageItem)item);
     }
 
     @Override
@@ -29,6 +33,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FComponentManager.registerComponent(new CurveManager(this, CurvesConsts.C_COMPONENT_CURVEMANAGER));
         FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
         FStageManager.registerItemClass("Control", "Curves.CurveControlStageItem");
+        FStageManager.registerItemClass("Console", "Curves.CurveConsoleStageItem");
     }
 
     protected CurveManager getCurveManager() {

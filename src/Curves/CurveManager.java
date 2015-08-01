@@ -68,6 +68,18 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         }
     }
 
+    protected synchronized void raiseLogAddedEvent(NGLogEvent aLogEvent) {
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleLogAdded(aLogEvent);
+        }
+    }
+
+    protected synchronized void raiseLogClear() {
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleLogClear();
+        }
+    }
+
     public CurveManager() {
         this("");
     }
@@ -105,11 +117,12 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     @Override
     public void handleAddLog(NGLogEvent e) {
-        System.out.println(e.LogEntry.GetFullAsString());
+        raiseLogAddedEvent(e);
     }
 
     @Override
     public void handleClearLog() {
+        raiseLogClear();
     }
 
 }

@@ -2,6 +2,7 @@ package Curves;
 
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGStageManager;
+import Uniwork.Misc.NGLogEvent;
 import javafx.stage.Stage;
 
 public class CurveStageItem extends NGCustomStageItem implements CurveEventListener {
@@ -23,6 +24,16 @@ public class CurveStageItem extends NGCustomStageItem implements CurveEventListe
     public void handleCurveCalculated(CurveEvent e) {
         CurveStageController sc = (CurveStageController)FStageController;
         sc.RenderCurve(e.getCurve());
+    }
+
+    @Override
+    public void handleLogAdded(NGLogEvent e) {
+
+    }
+
+    @Override
+    public void handleLogClear() {
+
     }
 
 }
