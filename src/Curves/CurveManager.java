@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class CurveManager extends NGComponent implements NGLogEventListener {
 
     protected ArrayList<CustomCurve> FCurves;
+    protected ArrayList<CurveEventListener> FEventListeners;
 
-    protected void LoadCurves() {
+    protected void DoLoadCurves() {
         // ToDo load from curve composition
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
@@ -26,6 +27,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     protected void DoCalculateCurve(CustomCurve aCurve) {
         aCurve.Calculate();
+        raiseCurveCalculatedEvent(aCurve);
     }
 
     protected void DoCalculateCurves() {
@@ -38,7 +40,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     }
 
-    protected void CalculateCurves() {
+    protected void InternalCalculateCurves() {
         BeginCalculateCurves();
         try {
             DoCalculateCurves();
@@ -52,16 +54,18 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     }
 
-    @Override
-    protected void DoBeforeInitialize() {
-        super.DoBeforeInitialize();
-        LoadCurves();
+    protected synchronized void raiseCurveAddedEvent(CustomCurve aCurve) {
+        CurveEvent event = new CurveEvent(this, aCurve);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleCurveAdded(event);
+        }
     }
 
-    @Override
-    protected void DoAfterInitialize() {
-        super.DoAfterInitialize();
-        CalculateCurves();
+    protected synchronized void raiseCurveCalculatedEvent(CustomCurve aCurve) {
+        CurveEvent event = new CurveEvent(this, aCurve);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleCurveCalculated(event);
+        }
     }
 
     public CurveManager() {
@@ -75,6 +79,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
     public CurveManager(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FCurves = new ArrayList<CustomCurve>();
+        FEventListeners = new ArrayList<CurveEventListener>();
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
     }
@@ -82,6 +87,20 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
     public void addCurve(CustomCurve aCurve) {
         FCurves.add(aCurve);
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getDefinition().getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
+        raiseCurveAddedEvent(aCurve);
+    }
+
+    public void addEventListener(CurveEventListener aListener)  {
+        FEventListeners.add(aListener);
+    }
+
+    public void removeEventListener(CurveEventListener aListener)   {
+        FEventListeners.remove(aListener);
+    }
+
+    public void LoadCurves() {
+        DoLoadCurves();
+        InternalCalculateCurves();
     }
 
     @Override

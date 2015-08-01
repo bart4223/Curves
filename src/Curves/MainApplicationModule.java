@@ -7,8 +7,8 @@ import Uniwork.Base.NGComponent;
 public class MainApplicationModule extends NGVisualApplicationModule {
 
     @Override
-    protected void DoInitialize() {
-        super.DoInitialize();
+    protected void DoBeforeInitialize() {
+        super.DoBeforeInitialize();
         NGCustomStageItem item = FStageManager.addStageItem("Main", FPrimaryStage);
         item.setCaption(FName);
         item.setPosition(1000, 100);
