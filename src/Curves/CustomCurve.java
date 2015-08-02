@@ -3,6 +3,7 @@ package Curves;
 import Uniwork.Base.NGObject;
 import Uniwork.Misc.NGLogEntry;
 import Uniwork.Misc.NGLogManager;
+import javafx.scene.paint.Color;
 
 import java.util.Iterator;
 
@@ -15,6 +16,7 @@ public abstract class CustomCurve extends NGObject {
     protected CurveManager FCurveManager;
     protected NGLogManager FLogManager;
     protected String FName;
+    protected Color FLineColor;
 
     protected void writeInfo(String aInfo) {
         writeInfo(0, aInfo);
@@ -101,6 +103,7 @@ public abstract class CustomCurve extends NGObject {
         FSolutionProcedure = aSolutionProcedure;
         FParameterValues = new CurveParameterValueList();
         FSolveParameterValues = new CurveParameterValueList();
+        FLineColor = Color.BLACK;
     }
 
     public CurveManager getCurveManager() {
@@ -134,6 +137,14 @@ public abstract class CustomCurve extends NGObject {
             CurveProblemDefinition problem = itr.next();
             Calculate(problem.getName());
         }
+    }
+
+    public void setLineColor(Color aColor) {
+        FLineColor = aColor;
+    }
+
+    public Color getLineColor() {
+        return FLineColor;
     }
 
     public void setParameterValue(String aName, double aValue) {

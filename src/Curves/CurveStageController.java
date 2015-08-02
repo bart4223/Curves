@@ -1,5 +1,6 @@
 package Curves;
 
+import Curves.Graphics.CartesianCoordinateSystem2DDisplayController;
 import Curves.Graphics.Curve2DDisplayController;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.*;
@@ -16,6 +17,9 @@ public class CurveStageController extends NGStageController {
     @FXML
     private Canvas Layer0;
 
+    @FXML
+    private Canvas Layer1;
+
     @Override
     protected void CreateDisplayController() {
         super.CreateDisplayController();
@@ -26,6 +30,10 @@ public class CurveStageController extends NGStageController {
         dcgrid.GridColor = Color.DARKGRAY;
         dcgrid.AlternateGridColor = false;
         registerDisplayController(dcgrid);
+        CartesianCoordinateSystem2DDisplayController dcCCS = new CartesianCoordinateSystem2DDisplayController(Layer1, "CCS");
+        dcCCS.setView(dv);
+        dcCCS.Distance = dcgrid.GridDistance;
+        registerDisplayController(dcCCS);
     }
 
     public CurveStageController() {

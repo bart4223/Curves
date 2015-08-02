@@ -1,13 +1,10 @@
 package Curves;
 
 import Uniwork.Graphics.NGPoint2D;
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
 public class Curve2D extends CustomCurve {
 
-    protected Color FLineColor;
     protected ArrayList<NGPoint2D> FPoints;
 
     @Override
@@ -44,16 +41,7 @@ public class Curve2D extends CustomCurve {
 
     public Curve2D(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
         super(aCurveManager, aName, aDefinition, aSolutionProcedure);
-        FLineColor = Color.BLUE;
         FPoints = new ArrayList<NGPoint2D>();
-    }
-
-    public void setLineColor(Color aColor) {
-        FLineColor = aColor;
-    }
-
-    public Color getLineColor() {
-        return FLineColor;
     }
 
     public ArrayList<NGPoint2D> getPoints() {

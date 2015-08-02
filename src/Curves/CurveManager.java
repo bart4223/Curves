@@ -7,6 +7,7 @@ import Uniwork.Base.NGComponentManager;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -17,12 +18,21 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
+        // CurveSolution I
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
-        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, 0, 100), proc);
+        // Curve I.1
+        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, -400, 400), proc);
+        curve.setLineColor(Color.BLUE);
         addCurve(curve);
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);
+        // Curve I.2
+        curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, -400, 400), proc);
+        curve.setLineColor(Color.RED);
+        addCurve(curve);
+        curve.setParameterValue("a", 0.5);
+        curve.setParameterValue("b", 10.0);
     }
 
     protected void DoCalculateCurve(CustomCurve aCurve) {
