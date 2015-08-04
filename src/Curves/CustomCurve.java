@@ -155,4 +155,16 @@ public abstract class CustomCurve extends NGObject {
         return FParameterValues.getValue(aName);
     }
 
+    public String getFormula() {
+        String res = FDefinition.getFormula();
+        Iterator<CurveParameterDefinition> itr = FDefinition.getParameters();
+        while (itr.hasNext()) {
+            CurveParameterDefinition paramDef = itr.next();
+            if (paramDef.getKind() == CurveParameterDefinition.Kind.Factor) {
+                res = res.replaceAll(paramDef.getName(), String.format("%.2f",getParameterValue(paramDef.getName())));
+            }
+        }
+        return res;
+    }
+
 }

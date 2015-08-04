@@ -1,9 +1,10 @@
 package Curves;
 
 import Curves.Definitions.FirstDegreePolynomialFunctionDefinition;
+import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
 import Curves.Solutions.FirstDegreePolynomialFunctionSolutionProcedure;
+import Curves.Solutions.SecondDegreePolynomialFunctionSolutionProcedure;
 import Uniwork.Base.NGComponent;
-import Uniwork.Base.NGComponentManager;
 import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
@@ -24,15 +25,25 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         // Curve I.1
         Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, -400, 400), proc);
         curve.setLineColor(Color.BLUE);
-        addCurve(curve);
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);
-        // Curve I.2
-        curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, -400, 400), proc);
-        curve.setLineColor(Color.RED);
         addCurve(curve);
+        // Curve I.2
+        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(0, 1, 0, 10, -400, 400), proc);
+        curve.setLineColor(Color.RED);
         curve.setParameterValue("a", 0.5);
         curve.setParameterValue("b", 10.0);
+        addCurve(curve);
+        // CurveSolution II
+        proc = new SecondDegreePolynomialFunctionSolutionProcedure();
+        proc.setLogManager(FLogManager);
+        // Curve II.1
+        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(0, 1, 0, 0, 0, 0, -40, 40), proc);
+        curve.setLineColor(Color.GREEN);
+        curve.setParameterValue("a", 0.5);
+        curve.setParameterValue("b", 0.0);
+        curve.setParameterValue("c", 0.0);
+        addCurve(curve);
     }
 
     protected void DoCalculateCurve(CustomCurve aCurve) {
@@ -108,7 +119,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     public void addCurve(CustomCurve aCurve) {
         FCurves.add(aCurve);
-        writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getDefinition().getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
+        writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
     }
 

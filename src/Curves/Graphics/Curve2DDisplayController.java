@@ -4,6 +4,7 @@ import Curves.Curve2D;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Visuals.NGDisplayController;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 public class Curve2DDisplayController extends NGDisplayController {
 
@@ -17,9 +18,21 @@ public class Curve2DDisplayController extends NGDisplayController {
     protected void DoRender() {
         super.DoRender();
         if (Curve instanceof Curve2D) {
+            FGC.setStroke(Curve.getLineColor());
+            FGC.setLineWidth(FPixelSize);
+            FGC.beginPath();
+            int index = 0;
             for (NGPoint2D point: Curve.getPoints()) {
-                drawPixel(point.getXAsInt() + (int) FCanvas.getWidth() / (2 * FPixelSize), (int) FCanvas.getHeight() / (2 * FPixelSize) - point.getYAsInt(), Curve.getLineColor());
+                if (index == 0)
+                    FGC.moveTo(point.getXAsInt() + (int) FCanvas.getWidth() / 2, (int) FCanvas.getHeight() / 2 - point.getYAsInt());
+                else {
+                    FGC.lineTo(point.getXAsInt() + (int) FCanvas.getWidth() / 2, (int) FCanvas.getHeight() / 2 - point.getYAsInt());
+                    FGC.moveTo(point.getXAsInt() + (int) FCanvas.getWidth() / 2, (int) FCanvas.getHeight() / 2 - point.getYAsInt());
+                }
+                index++;
             }
+            FGC.stroke();
+            FGC.closePath();
         }
     }
 
@@ -30,7 +43,7 @@ public class Curve2DDisplayController extends NGDisplayController {
     public Curve2DDisplayController(Canvas aCanvas, String aName) {
         super(aCanvas, aName);
         Curve = null;
-        FPixelSize = 1;
+        FPixelSize = 2;
     }
 
     public Curve2D Curve;
