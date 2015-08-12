@@ -3,8 +3,12 @@ package Curves;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
+import Uniwork.Base.NGObjectRequestMethod;
+import Uniwork.Base.NGObjectRequestParameter;
 
 public class CurveApplicationModule extends NGVisualApplicationModule {
+
+    protected CurveManager FCurveManager;
 
     @Override
     protected void DoBeforeInitialize() {
@@ -12,20 +16,27 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         NGCustomStageItem item = FStageManager.addStageItem("Control");
         item.setCaption(String.format("%s.Control", FName));
         item.setPosition(1500, 200);
+        getCurveManager().addEventListener((CurveEventListener)item);
         item = FStageManager.addStageItem("Curve");
         item.setCaption(String.format("%s.Curve", FName));
         item.setPosition(1500, 300);
-        getCurveManager().addEventListener((CurveStageItem)item);
+        getCurveManager().addEventListener((CurveEventListener)item);
         item = FStageManager.addStageItem("Console");
         item.setCaption(String.format("%s.Console", FName));
         item.setPosition(1500, 1150);
-        getCurveManager().addEventListener((CurveConsoleStageItem)item);
+        getCurveManager().addEventListener((CurveEventListener)item);
     }
 
     @Override
     protected void DoAfterInitialize() {
         super.DoAfterInitialize();
         getCurveManager().LoadCurves();
+    }
+
+    @Override
+    protected void registerObjectRequests() {
+        NGObjectRequestMethod requestMethod= registerObjectRequest("Curve", this, "CurrentCurve", "setCurrentCurve");
+        requestMethod.addParam("aName", NGObjectRequestParameter.ParamKind.String);
     }
 
     public CurveApplicationModule(NGComponent aOwner, String aName, String aDescription) {
@@ -37,7 +48,13 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
     }
 
     protected CurveManager getCurveManager() {
-        return (CurveManager)FComponentManager.getComponent(CurvesConsts.C_COMPONENT_CURVEMANAGER);
+        if (FCurveManager == null)
+            FCurveManager = (CurveManager)FComponentManager.getComponent(CurvesConsts.C_COMPONENT_CURVEMANAGER);
+        return FCurveManager;
+    }
+
+    public void setCurrentCurve(String aName) {
+        FCurveManager.setCurrentCurve(aName);
     }
 
 }

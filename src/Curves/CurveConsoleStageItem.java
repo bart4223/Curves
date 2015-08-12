@@ -27,6 +27,11 @@ public class CurveConsoleStageItem extends NGCustomStageItem implements CurveEve
     }
 
     @Override
+    public void handleCurrentCurveChanged(CurveEvent e) {
+
+    }
+
+    @Override
     public void handleLogAdded(NGLogEvent e) {
         CurveConsoleStageController sc = (CurveConsoleStageController)FStageController;
         sc.addLog(e.LogEntry.GetFullAsString());

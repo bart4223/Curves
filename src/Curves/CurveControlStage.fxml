@@ -2,9 +2,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane fx:controller="Curves.CurveControlStageController" xmlns:fx="http://javafx.com/fxml" >
     <HBox prefHeight="50" minWidth="800" alignment="TOP_LEFT" spacing="10" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: darkgray;">
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
         <Button id="btnAdd" prefWidth="80" text="Add" onAction="#handleAdd" fx:id="btnAdd" />
+        <Button id="btnRemove" prefWidth="80" text="Remove" onAction="#handleRemove" fx:id="btnRemove" />
+        <ComboBox id="cbCurves" prefWidth="200" onAction="#handlecbCurves" fx:id="cbCurves" />
+        <Button id="btnProps" prefWidth="20" text="..." onAction="#handleProps" fx:id="btnProps" />
     </HBox>
 </AnchorPane>

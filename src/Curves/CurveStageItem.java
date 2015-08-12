@@ -27,6 +27,11 @@ public class CurveStageItem extends NGCustomStageItem implements CurveEventListe
     }
 
     @Override
+    public void handleCurrentCurveChanged(CurveEvent e) {
+
+    }
+
+    @Override
     public void handleLogAdded(NGLogEvent e) {
 
     }

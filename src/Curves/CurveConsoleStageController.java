@@ -11,8 +11,7 @@ public class CurveConsoleStageController extends NGStageController {
     private TextArea Log;
 
     public void addLog(String aText) {
-        Log.setText(NGStrings.addString(Log.getText(), aText, "\n"));
-        Log.end();
+        Log.setText(NGStrings.addString(aText, Log.getText(), "\n"));
     }
 
     public void clearLog() {

@@ -167,4 +167,8 @@ public abstract class CustomCurve extends NGObject {
         return res;
     }
 
+    public String getDescription() {
+        return FDefinition.getDescription();
+    }
+
 }

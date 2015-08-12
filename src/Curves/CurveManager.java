@@ -16,6 +16,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
 
     protected ArrayList<CustomCurve> FCurves;
     protected ArrayList<CurveEventListener> FEventListeners;
+    protected CustomCurve FCurrentCurve;
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
@@ -28,6 +29,7 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);
         addCurve(curve);
+        FCurrentCurve = curve;
         // Curve I.2
         curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(0, 1, 0, 10, -400, 400), proc);
         curve.setLineColor(Color.RED);
@@ -89,6 +91,13 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         }
     }
 
+    protected synchronized void raiseCurrentCurveChangedEvent(CustomCurve aCurve) {
+        CurveEvent event = new CurveEvent(this, aCurve);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleCurrentCurveChanged(event);
+        }
+    }
+
     protected synchronized void raiseLogAddedEvent(NGLogEvent aLogEvent) {
         for (CurveEventListener listener : FEventListeners) {
             listener.handleLogAdded(aLogEvent);
@@ -99,6 +108,21 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         for (CurveEventListener listener : FEventListeners) {
             listener.handleLogClear();
         }
+    }
+
+    protected CustomCurve getCurve(String aName) {
+        for (CustomCurve curve : FCurves) {
+            if (curve.getName().equals(aName)) {
+                return curve;
+            }
+        }
+        return null;
+    }
+
+    public void setCurrentCurve(CustomCurve aCurve) {
+        FCurrentCurve = aCurve;
+        writeInfo(String.format("Current curve is [%s]",FCurrentCurve.getName()));
+        raiseCurrentCurveChangedEvent(FCurrentCurve);
     }
 
     public CurveManager() {
@@ -115,12 +139,14 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         FEventListeners = new ArrayList<CurveEventListener>();
         FLogManager = new NGLogManager();
         FLogManager.addEventListener(this);
+        FCurrentCurve = null;
     }
 
     public void addCurve(CustomCurve aCurve) {
         FCurves.add(aCurve);
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
+        setCurrentCurve(aCurve);
     }
 
     public void addEventListener(CurveEventListener aListener)  {
@@ -134,6 +160,15 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
     public void LoadCurves() {
         DoLoadCurves();
         InternalCalculateCurves();
+    }
+
+    public CustomCurve getCurrentCurve() {
+        return FCurrentCurve;
+    }
+
+    public CustomCurve setCurrentCurve(String aName) {
+        setCurrentCurve(getCurve(aName));
+        return FCurrentCurve;
     }
 
     @Override
