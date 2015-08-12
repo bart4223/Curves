@@ -26,3 +26,4 @@ Version history
     29.05.15    Built-In Application module
     03.06.15    Application module works
     02.08.15    First display curve
+    13.08.15    Current curve
