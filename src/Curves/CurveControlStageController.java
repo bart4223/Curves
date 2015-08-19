@@ -36,7 +36,7 @@ public class CurveControlStageController extends NGStageController {
     public void handlecbCurves(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
             if (cbCurves.getValue() != null) {
-                NGObjectRequestItem aRequest = new NGObjectRequestItem("Curve", "CurrentCurve");
+                NGObjectRequestItem aRequest = newObjectRequest("Curve", "CurrentCurve");
                 aRequest.addParam("aName", cbCurves.getValue().toString());
                 Invoke(aRequest);
             }

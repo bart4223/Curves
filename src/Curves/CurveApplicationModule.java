@@ -35,7 +35,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     @Override
     protected void registerObjectRequests() {
-        NGObjectRequestMethod requestMethod= registerObjectRequest("Curve", this, "CurrentCurve", "setCurrentCurve");
+        NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", this, "CurrentCurve", "setCurrentCurve");
         requestMethod.addParam("aName", NGObjectRequestParameter.ParamKind.String);
     }
 
