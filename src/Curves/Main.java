@@ -29,7 +29,7 @@ public class Main extends NGApplication {
     }
 
     public void addCurveModule() {
-        addModule(CurveApplicationModule.class, true);
+        addModule(CurveApplicationModule.class, true, String.format("%d", FModuleManager.getModuleCount()));
     }
 
 }

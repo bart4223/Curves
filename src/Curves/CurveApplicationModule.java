@@ -14,15 +14,15 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
     protected void DoBeforeInitialize() {
         super.DoBeforeInitialize();
         NGCustomStageItem item = FStageManager.addStageItem("Control");
-        item.setCaption(String.format("%s.Control", FName));
+        item.setCaption(String.format("%s.Control", getDescription()));
         item.setPosition(1500, 200);
         getCurveManager().addEventListener((CurveEventListener)item);
         item = FStageManager.addStageItem("Curve");
-        item.setCaption(String.format("%s.Curve", FName));
+        item.setCaption(String.format("%s.Curve", getDescription()));
         item.setPosition(1500, 300);
         getCurveManager().addEventListener((CurveEventListener)item);
         item = FStageManager.addStageItem("Console");
-        item.setCaption(String.format("%s.Console", FName));
+        item.setCaption(String.format("%s.Console", getDescription()));
         item.setPosition(1500, 1150);
         getCurveManager().addEventListener((CurveEventListener)item);
     }
@@ -39,8 +39,8 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         requestMethod.addParam("aName", NGObjectRequestParameter.ParamKind.String);
     }
 
-    public CurveApplicationModule(NGComponent aOwner, String aName, String aDescription) {
-        super(aOwner, aName, aDescription);
+    public CurveApplicationModule(NGComponent aOwner, String aName) {
+        super(aOwner, aName);
         FComponentManager.registerComponent(new CurveManager(this, CurvesConsts.C_COMPONENT_CURVEMANAGER));
         FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
         FStageManager.registerItemClass("Control", "Curves.CurveControlStageItem");
