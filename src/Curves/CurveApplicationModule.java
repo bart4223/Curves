@@ -36,8 +36,9 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     @Override
     protected void registerObjectRequests() {
-        NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", this, "CurrentCurve", "setCurrentCurve");
+        NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", FCurveManager, "CurrentCurve", "setCurrentCurve");
         requestMethod.addParam("aName", NGObjectRequestParameter.ParamKind.String);
+        registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
     }
 
     public CurveApplicationModule(NGComponent aOwner, String aName) {
@@ -46,6 +47,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
         FStageManager.registerItemClass("Control", "Curves.CurveControlStageItem");
         FStageManager.registerItemClass("Console", "Uniwork.UI.NGUIConsoleStageItem");
+        FToolboxManager.registerItemClass("Curve", "Curves.CurveToolboxItem");
     }
 
     protected CurveManager getCurveManager() {
@@ -54,8 +56,10 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         return FCurveManager;
     }
 
-    public void setCurrentCurve(String aName) {
-        FCurveManager.setCurrentCurve(aName);
+    public void ShowCurrentCurve() {
+        CustomCurve curve = FCurveManager.getCurrentCurve();
+        if (curve != null)
+            FToolboxManager.ShowToolbox("Curve", getDescription(), new CurveToolboxContext(curve));
     }
 
 }

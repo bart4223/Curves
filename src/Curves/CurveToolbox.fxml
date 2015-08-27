@@ -1,0 +1,3 @@
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:controller="Curves.CurveToolboxController" xmlns:fx="http://javafx.com/fxml" fx:id="AnchorPane0" style="-fx-background-color: lightgray;">
+</AnchorPane>
