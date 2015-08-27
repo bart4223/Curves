@@ -16,6 +16,11 @@ public class MainStageController extends NGStageController {
         Invoke("Application", "addCurveModule");
     }
 
+    @FXML
+    protected void handleHelp(){
+        Invoke("Main", "Help");
+    }
+
     public MainStageController() {
         this(null);
     }

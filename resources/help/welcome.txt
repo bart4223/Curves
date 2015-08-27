@@ -1,0 +1,7 @@
+Welcome to curves...
+
+Curves is a project to visualize and animate some mathematical functions.
+
+Have fun...
+
+(C) by NG MMXV
