@@ -5,14 +5,13 @@ import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
 import Curves.Solutions.FirstDegreePolynomialFunctionSolutionProcedure;
 import Curves.Solutions.SecondDegreePolynomialFunctionSolutionProcedure;
 import Uniwork.Base.NGComponent;
-import Uniwork.Misc.NGLogEvent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class CurveManager extends NGComponent implements NGLogEventListener {
+public class CurveManager extends NGComponent {
 
     protected ArrayList<CustomCurve> FCurves;
     protected ArrayList<CurveEventListener> FEventListeners;
@@ -98,18 +97,6 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         }
     }
 
-    protected synchronized void raiseLogAddedEvent(NGLogEvent aLogEvent) {
-        for (CurveEventListener listener : FEventListeners) {
-            listener.handleLogAdded(aLogEvent);
-        }
-    }
-
-    protected synchronized void raiseLogClear() {
-        for (CurveEventListener listener : FEventListeners) {
-            listener.handleLogClear();
-        }
-    }
-
     protected CustomCurve getCurve(String aName) {
         for (CustomCurve curve : FCurves) {
             if (curve.getName().equals(aName)) {
@@ -138,7 +125,6 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         FCurves = new ArrayList<CustomCurve>();
         FEventListeners = new ArrayList<CurveEventListener>();
         FLogManager = new NGLogManager();
-        FLogManager.addEventListener(this);
         FCurrentCurve = null;
     }
 
@@ -171,14 +157,12 @@ public class CurveManager extends NGComponent implements NGLogEventListener {
         return FCurrentCurve;
     }
 
-    @Override
-    public void handleAddLog(NGLogEvent e) {
-        raiseLogAddedEvent(e);
+    public void addLogListener(NGLogEventListener aLogListener) {
+        FLogManager.addEventListener(aLogListener);
     }
 
-    @Override
-    public void handleClearLog() {
-        raiseLogClear();
+    public void removeLogListener(NGLogEventListener aLogListener) {
+        FLogManager.removeEventListener(aLogListener);
     }
 
 }

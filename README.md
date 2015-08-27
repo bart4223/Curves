@@ -27,3 +27,4 @@ Version history
     03.06.15    Application module works
     02.08.15    First display curve
     13.08.15    Current curve
+    26.08.15    Usage Uniwork console

@@ -31,13 +31,4 @@ public class CurveControlStageItem extends NGCustomStageItem implements CurveEve
         sc.setCurrentCurve(e.getCurve());
     }
 
-    @Override
-    public void handleLogAdded(NGLogEvent e) {
-
-    }
-
-    @Override
-    public void handleLogClear() {
-
-    }
 }
