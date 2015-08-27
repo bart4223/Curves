@@ -28,3 +28,4 @@ Version history
     02.08.15    First display curve
     13.08.15    Current curve
     26.08.15    Usage Uniwork console
+    27.08.15    Usage Uniwork help toolbox
