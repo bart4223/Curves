@@ -4,7 +4,6 @@ import Curves.Curve2D;
 import Uniwork.Graphics.NGPoint2D;
 import Uniwork.Visuals.NGDisplayController;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
 
 public class Curve2DDisplayController extends NGDisplayController {
 
@@ -17,7 +16,7 @@ public class Curve2DDisplayController extends NGDisplayController {
     @Override
     protected void DoRender() {
         super.DoRender();
-        if (Curve instanceof Curve2D) {
+        if (Curve != null) {
             FGC.setStroke(Curve.getLineColor());
             FGC.setLineWidth(FPixelSize);
             FGC.beginPath();

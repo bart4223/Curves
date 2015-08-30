@@ -5,7 +5,7 @@ import Uniwork.Appl.NGStageManager;
 import Uniwork.Misc.NGStrings;
 import javafx.stage.Stage;
 
-public class CurveToolboxItem extends NGCustomToolboxItem {
+public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventListener {
 
     @Override
     protected void CreateStage() {
@@ -19,7 +19,8 @@ public class CurveToolboxItem extends NGCustomToolboxItem {
         if (aContext instanceof CurveToolboxContext) {
             CustomCurve curve = ((CurveToolboxContext)aContext).getCurve();
             CurveToolboxController sc = (CurveToolboxController)FStageController;
-            setCaption(String.format("%s.%s", NGStrings.getFirstString(getCaption(), "."), curve.getName()));
+            setCaption(String.format("%s.Toolbox", NGStrings.getFirstString(getCaption(), ".")));
+            sc.setContext(curve);
         }
     }
 
@@ -28,8 +29,23 @@ public class CurveToolboxItem extends NGCustomToolboxItem {
         FFXMLName = "CurveToolbox.fxml";
         FWidth = 400;
         FHeight = 400;
-        FPosition.setX(800);
-        FPosition.setY(500);
+        FPosition.setX(1050);
+        FPosition.setY(300);
     }
 
+    @Override
+    public void handleCurveAdded(CurveEvent e) {
+
+    }
+
+    @Override
+    public void handleCurveCalculated(CurveEvent e) {
+        CurveToolboxController sc = (CurveToolboxController)FStageController;
+        sc.UpdateStage(e.getCurve());
+    }
+
+    @Override
+    public void handleCurrentCurveChanged(CurveEvent e) {
+
+    }
 }

@@ -23,14 +23,14 @@ public class CurveManager extends NGComponent {
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
         // Curve I.1
-        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(1, 1, 0, 0, -400, 400), proc);
+        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(-10, 10, -400, 400, -400, 400), proc);
         curve.setLineColor(Color.BLUE);
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);
         addCurve(curve);
         FCurrentCurve = curve;
         // Curve I.2
-        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(0, 1, 0, 10, -400, 400), proc);
+        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(-10, 10, -400, 400, -400, 400), proc);
         curve.setLineColor(Color.RED);
         curve.setParameterValue("a", 0.5);
         curve.setParameterValue("b", 10.0);
@@ -39,7 +39,7 @@ public class CurveManager extends NGComponent {
         proc = new SecondDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
         // Curve II.1
-        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(0, 1, 0, 0, 0, 0, -40, 40), proc);
+        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(-10, 10, -100, 100, -400, 400, -40, 40), proc);
         curve.setLineColor(Color.GREEN);
         curve.setParameterValue("a", 0.5);
         curve.setParameterValue("b", 0.0);
@@ -47,15 +47,31 @@ public class CurveManager extends NGComponent {
         addCurve(curve);
     }
 
+    protected void BeginCalculateCurve(CustomCurve aCurve) {
+
+    }
+
+    protected void EndCalculateCurve(CustomCurve aCurve) {
+
+    }
+
     protected void DoCalculateCurve(CustomCurve aCurve) {
         aCurve.Calculate();
         raiseCurveCalculatedEvent(aCurve);
     }
 
-    protected void DoCalculateCurves() {
-        for (CustomCurve curve : FCurves) {
-            DoCalculateCurve(curve);
+    protected void InternalCalculateCurve(CustomCurve aCurve) {
+        BeginCalculateCurve(aCurve);
+        try {
+            DoCalculateCurve(aCurve);
+        } finally {
+            EndCalculateCurve(aCurve);
         }
+    }
+
+    protected void DoCalculateCurves() {
+        for (CustomCurve curve : FCurves)
+            InternalCalculateCurve(curve);
     }
 
     protected void BeginCalculateCurves() {
@@ -163,6 +179,14 @@ public class CurveManager extends NGComponent {
 
     public void removeLogListener(NGLogEventListener aLogListener) {
         FLogManager.removeEventListener(aLogListener);
+    }
+
+    public void CalculateCurves() {
+        InternalCalculateCurves();
+    }
+
+    public void CalculateCurve(CustomCurve aCurve) {
+        InternalCalculateCurve(aCurve);
     }
 
 }

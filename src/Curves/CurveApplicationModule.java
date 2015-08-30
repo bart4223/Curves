@@ -58,8 +58,10 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     public void ShowCurrentCurve() {
         CustomCurve curve = FCurveManager.getCurrentCurve();
-        if (curve != null)
-            FToolboxManager.ShowToolbox("Curve", getDescription(), new CurveToolboxContext(curve));
+        if (curve != null) {
+            NGCustomStageItem tb = FToolboxManager.ShowToolbox("Curve", getDescription(), new CurveToolboxContext(curve));
+            FCurveManager.addEventListener((CurveEventListener)tb);
+        }
     }
 
 }

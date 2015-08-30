@@ -1,3 +1,13 @@
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane fx:controller="Curves.CurveToolboxController" xmlns:fx="http://javafx.com/fxml" fx:id="AnchorPane0" style="-fx-background-color: lightgray;">
+    <VBox id="VBox" prefHeight="400" prefWidth="400" alignment="TOP_LEFT" spacing="15" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: lightgray" fx:id="VBox">
+        <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+        <TextField id="edName" editable="false" fx:id="edName"/>
+        <Text id="lDesc" fx:id="lDesc"/>
+        <Text id="lFormula" fx:id="lFormula"/>
+    </VBox>
 </AnchorPane>

@@ -2,7 +2,6 @@ package Curves;
 
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGStageManager;
-import Uniwork.Misc.NGLogEvent;
 import javafx.stage.Stage;
 
 public class CurveControlStageItem extends NGCustomStageItem implements CurveEventListener {
