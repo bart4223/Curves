@@ -23,25 +23,38 @@ public class CurveManager extends NGComponent {
         CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
         // Curve I.1
-        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(-10, 10, -400, 400, -400, 400), proc);
+        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(), proc);
+        curve.addDefinitionArea("a", -10.0, 10.0);
+        curve.addDefinitionArea("b", -400.0, 400.0);
+        curve.addDefinitionArea("x", -400.0, 400.0);
+        //curve.addDefinitionArea("y", -400.0, 400.0);
         curve.setLineColor(Color.BLUE);
         curve.setParameterValue("a", 1.0);
         curve.setParameterValue("b", 0.0);
         addCurve(curve);
         FCurrentCurve = curve;
         // Curve I.2
-        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(-10, 10, -400, 400, -400, 400), proc);
+        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(), proc);
+        curve.addDefinitionArea("a", -10.0, 10.0);
+        curve.addDefinitionArea("b", -400.0, 400.0);
+        curve.addDefinitionArea("x", -400.0, 400.0);
+        //curve.addDefinitionArea("y", -400.0, 400.0);
         curve.setLineColor(Color.RED);
         curve.setParameterValue("a", 0.5);
-        curve.setParameterValue("b", 10.0);
+        curve.setParameterValue("b", 100.0);
         addCurve(curve);
         // CurveSolution II
         proc = new SecondDegreePolynomialFunctionSolutionProcedure();
         proc.setLogManager(FLogManager);
         // Curve II.1
-        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(-10, 10, -100, 100, -400, 400, -40, 40), proc);
+        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(), proc);
+        curve.addDefinitionArea("a", -10.0, 10.0);
+        curve.addDefinitionArea("b", -100.0, 100.0);
+        curve.addDefinitionArea("c", -400.0, 400.0);
+        curve.addDefinitionArea("x", -400.0, 400.0);
+        //curve.addDefinitionArea("y", -400.0, 400.0);
         curve.setLineColor(Color.GREEN);
-        curve.setParameterValue("a", 0.5);
+        curve.setParameterValue("a", 0.25);
         curve.setParameterValue("b", 0.0);
         curve.setParameterValue("c", 0.0);
         addCurve(curve);

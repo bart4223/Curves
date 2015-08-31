@@ -73,4 +73,9 @@ public abstract class CustomCurveDefinition extends NGObject {
         return FParameters.iterator();
     }
 
+    public CurveParameterDefinitionArea addDefinitionArea(String aName, Double aMin, Double aMax) {
+        CurveParameterDefinition def = getParameterDefintion(aName);
+        return def.addDefinitionArea(aMin, aMax);
+    }
+
 }

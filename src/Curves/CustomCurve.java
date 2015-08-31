@@ -55,14 +55,14 @@ public abstract class CustomCurve extends NGObject {
     protected void InternalCalculate(String aProblemName) {
         switch (getSolveProblem(aProblemName).getKind()) {
             case Value:
-                CurveParameterDefinition param = FDefinition.getParameterDefintion(CurveParameterDefinition.Kind.X);
-                Iterator<CurveParameterDefinitionArea> itr = param.getDefinitionAreas();
+                CurveParameterDefinition paramX = FDefinition.getParameterDefintion(CurveParameterDefinition.Kind.X);
+                Iterator<CurveParameterDefinitionArea> itr = paramX.getDefinitionAreas();
                 while (itr.hasNext()) {
                     CurveParameterDefinitionArea area = itr.next();
                     for (double x = area.getMin(); x <= area.getMax(); x = x + 1.0) {
                         DoBeforeCalculate(aProblemName);
                         try {
-                            setSolveParameterValue(param.getName(), x);
+                            setSolveParameterValue(paramX.getName(), x);
                             DoCalculate(aProblemName);
                         } finally {
                             DoAfterCalculate(aProblemName);
@@ -169,6 +169,10 @@ public abstract class CustomCurve extends NGObject {
 
     public String getDescription() {
         return FDefinition.getDescription();
+    }
+
+    public void addDefinitionArea(String aName, Double aMin, Double aMax) {
+        FDefinition.addDefinitionArea(aName, aMin, aMax);
     }
 
 }

@@ -38,13 +38,38 @@ public class CurveParameterDefinition extends NGObject {
         return FDescription;
     }
 
-    public void addDefinitionArea(double aMin, double aMax) {
+    public CurveParameterDefinitionArea addDefinitionArea(double aMin, double aMax) {
         CurveParameterDefinitionArea area = new CurveParameterDefinitionArea(aMin, aMax);
         FDefintionAreas.add(area);
+        return area;
     }
 
     public Iterator<CurveParameterDefinitionArea> getDefinitionAreas() {
         return FDefintionAreas.iterator();
+    }
+
+    public CurveParameterDefinitionArea getMin() {
+        Double min = 0.0;
+        CurveParameterDefinitionArea res = null;
+        for (CurveParameterDefinitionArea area : FDefintionAreas) {
+            if (area.getMin() < min) {
+                min = area.getMin();
+                res = area;
+            }
+        }
+        return res;
+    }
+
+    public CurveParameterDefinitionArea getMax() {
+        Double max = 0.0;
+        CurveParameterDefinitionArea res = null;
+        for (CurveParameterDefinitionArea area : FDefintionAreas) {
+            if (area.getMax() > max) {
+                max = area.getMax();
+                res = area;
+            }
+        }
+        return res;
     }
 
 }
