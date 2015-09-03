@@ -112,6 +112,13 @@ public class CurveManager extends NGComponent {
         }
     }
 
+    protected synchronized void raiseCurveChangedEvent(CustomCurve aCurve) {
+        CurveEvent event = new CurveEvent(this, aCurve);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleCurveChanged(event);
+        }
+    }
+
     protected synchronized void raiseCurveCalculatedEvent(CustomCurve aCurve) {
         CurveEvent event = new CurveEvent(this, aCurve);
         for (CurveEventListener listener : FEventListeners) {
@@ -148,6 +155,11 @@ public class CurveManager extends NGComponent {
         FCurrentCurve = aCurve;
         writeInfo(String.format("Current curve is [%s]",FCurrentCurve.getName()));
         raiseCurrentCurveChangedEvent(FCurrentCurve);
+    }
+
+    public void setCurveNewName(CustomCurve aCurve, String aName) {
+        aCurve.setName(aName);
+        raiseCurveChangedEvent(FCurrentCurve);
     }
 
     public CurveManager() {

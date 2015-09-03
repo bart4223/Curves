@@ -42,9 +42,7 @@ public class CurveToolboxController extends NGToolboxController {
 
         @Override
         public void changed(ObservableValue observableValue, Object o, Object t1) {
-            FCurve.setName((String)t1);
-            System.out.println(FCurve.getName());
-            FCurve.getCurveManager().CalculateCurve(FCurve);
+            FCurve.getCurveManager().setCurveNewName(FCurve, (String) t1);
         }
 
     }

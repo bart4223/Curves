@@ -20,6 +20,12 @@ public class CurveControlStageItem extends NGCustomStageItem implements CurveEve
     }
 
     @Override
+    public void handleCurveChanged(CurveEvent e) {
+        CurveControlStageController sc = (CurveControlStageController)FStageController;
+        sc.CurveChanged(e.getCurve());
+    }
+
+    @Override
     public void handleCurveCalculated(CurveEvent e) {
 
     }
