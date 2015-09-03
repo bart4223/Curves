@@ -36,8 +36,8 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     @Override
     protected void registerObjectRequests() {
-        NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", FCurveManager, "CurrentCurve", "setCurrentCurve");
-        requestMethod.addParam("aName", NGObjectRequestParameter.ParamKind.String);
+        NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", FCurveManager, "CurrentCurve", "setCurrentCurveByID");
+        requestMethod.addParam("aID", NGObjectRequestParameter.ParamKind.String);
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
     }
 
@@ -59,7 +59,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
     public void ShowCurrentCurve() {
         CustomCurve curve = FCurveManager.getCurrentCurve();
         if (curve != null) {
-            NGCustomStageItem tb = FToolboxManager.ShowToolbox("Curve", getDescription(), new CurveToolboxContext(curve));
+            NGCustomStageItem tb = FToolboxManager.ShowToolbox("Curve", curve.getName(), getDescription(), new CurveToolboxContext(curve));
             FCurveManager.addEventListener((CurveEventListener)tb);
         }
     }

@@ -31,6 +31,7 @@ public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventL
         FHeight = 400;
         FPosition.setX(1050);
         FPosition.setY(300);
+        FUnique = true;
     }
 
     @Override

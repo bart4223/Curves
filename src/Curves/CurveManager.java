@@ -126,9 +126,18 @@ public class CurveManager extends NGComponent {
         }
     }
 
-    protected CustomCurve getCurve(String aName) {
+    protected CustomCurve getCurveByName(String aName) {
         for (CustomCurve curve : FCurves) {
             if (curve.getName().equals(aName)) {
+                return curve;
+            }
+        }
+        return null;
+    }
+
+    protected CustomCurve getCurveByID(String aID) {
+        for (CustomCurve curve : FCurves) {
+            if (curve.getID().equals(aID)) {
                 return curve;
             }
         }
@@ -181,8 +190,13 @@ public class CurveManager extends NGComponent {
         return FCurrentCurve;
     }
 
-    public CustomCurve setCurrentCurve(String aName) {
-        setCurrentCurve(getCurve(aName));
+    public CustomCurve setCurrentCurveByName(String aName) {
+        setCurrentCurve(getCurveByName(aName));
+        return FCurrentCurve;
+    }
+
+    public CustomCurve setCurrentCurveByID(String aID) {
+        setCurrentCurve(getCurveByID(aID));
         return FCurrentCurve;
     }
 

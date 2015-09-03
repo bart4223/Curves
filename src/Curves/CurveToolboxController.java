@@ -34,6 +34,22 @@ public class CurveToolboxController extends NGToolboxController {
 
     }
 
+    protected class EditChangeListener implements ChangeListener {
+
+        public EditChangeListener() {
+            super();
+        }
+
+        @Override
+        public void changed(ObservableValue observableValue, Object o, Object t1) {
+            FCurve.setName((String)t1);
+            System.out.println(FCurve.getName());
+            FCurve.getCurveManager().CalculateCurve(FCurve);
+        }
+
+    }
+
+
     @FXML
     private VBox VBox;
 
@@ -75,6 +91,7 @@ public class CurveToolboxController extends NGToolboxController {
                     slider.setTooltip(new Tooltip(def.getName()));
                     slider.setValue(FCurve.getParameterValue(def.getName()));
                     slider.valueProperty().addListener(new SliderChangeListener(slider));
+                    edName.textProperty().addListener(new EditChangeListener());
                     FControls.add(slider);
                     VBox.getChildren().add(slider);
                     break;

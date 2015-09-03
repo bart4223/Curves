@@ -36,21 +36,27 @@ public class CurveControlStageController extends NGStageController {
 
     public void handlecbCurves(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
-            if (cbCurves.getValue() != null) {
-                NGObjectRequestItem aRequest = newObjectRequest("Curve", "CurrentCurve");
-                aRequest.addParam("aName", cbCurves.getValue().toString());
-                Invoke(aRequest);
-            }
+            NGObjectRequestItem aRequest = newObjectRequest("Curve", "CurrentCurve");
+            ComboboxText text = (ComboboxText)cbCurves.getSelectionModel().getSelectedItem();
+            aRequest.addParam("aID", text.getId());
+            Invoke(aRequest);
         }
     }
 
     public void setCurrentCurve(CustomCurve aCurve) {
-        cbCurves.getSelectionModel().select(aCurve.getName());
-        cbCurves.setTooltip(new Tooltip(aCurve.getDescription()));
+        for (Object obj : cbCurves.getItems()) {
+            ComboboxText text = (ComboboxText)obj;
+            if (text.getId().equals(aCurve.getID())) {
+                cbCurves.getSelectionModel().select(text);
+                cbCurves.setTooltip(new Tooltip(aCurve.getDescription()));
+                break;
+            }
+        }
     }
 
     public void addCurve(CustomCurve aCurve) {
-        cbCurves.getItems().add(aCurve.getName());
+        ComboboxText text = new ComboboxText(aCurve.getID(), aCurve.getName());
+        cbCurves.getItems().add(text);
     }
 
 }
