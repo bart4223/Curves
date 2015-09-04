@@ -162,6 +162,11 @@ public class CurveManager extends NGComponent {
         raiseCurveChangedEvent(FCurrentCurve);
     }
 
+    public void setCurveLineColor(CustomCurve aCurve, Color aColor) {
+        aCurve.setLineColor(aColor);
+        raiseCurveChangedEvent(FCurrentCurve);
+    }
+
     public CurveManager() {
         this("");
     }

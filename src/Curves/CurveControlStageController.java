@@ -62,7 +62,7 @@ public class CurveControlStageController extends NGStageController {
     public void CurveChanged(CustomCurve aCurve) {
         for (Object obj : cbCurves.getItems()) {
             ComboboxText text = (ComboboxText)obj;
-            if (text.getId().equals(aCurve.getID())) {
+            if (text.getId().equals(aCurve.getID()) && text.getName() != aCurve.getName()) {
                 ComboboxText newtext = new ComboboxText(aCurve.getID(), aCurve.getName());
                 cbCurves.getItems().add(newtext);
                 if (cbCurves.getSelectionModel().getSelectedItem().equals(text))

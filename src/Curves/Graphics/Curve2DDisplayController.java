@@ -42,7 +42,7 @@ public class Curve2DDisplayController extends NGDisplayController {
     public Curve2DDisplayController(Canvas aCanvas, String aName) {
         super(aCanvas, aName);
         Curve = null;
-        FPixelSize = 1;
+        FPixelSize = 2;
     }
 
     public Curve2D Curve;

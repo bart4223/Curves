@@ -4,11 +4,9 @@ import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.NGToolboxController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Control;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -47,6 +45,11 @@ public class CurveToolboxController extends NGToolboxController {
 
     }
 
+    @FXML
+    protected void handleCurveColor() {
+        FCurve.getCurveManager().setCurveLineColor(FCurve, cpCurveColor.getValue());
+        lFormula.setStroke(FCurve.getLineColor());
+    }
 
     @FXML
     private VBox VBox;
@@ -60,6 +63,9 @@ public class CurveToolboxController extends NGToolboxController {
     @FXML
     private Text lFormula;
 
+    @FXML
+    private ColorPicker cpCurveColor;
+
     protected ArrayList<Control> FControls;
 
     protected CustomCurve FCurve;
@@ -69,6 +75,11 @@ public class CurveToolboxController extends NGToolboxController {
         lDesc.setText(FCurve.getDescription());
         lFormula.setText(FCurve.getFormula());
         lFormula.setStroke(FCurve.getLineColor());
+        cpCurveColor.setValue(FCurve.getLineColor());
+        // workaround start
+        Button hlpbutton = new Button("Press me.");
+        cpCurveColor.fireEvent(new ActionEvent(hlpbutton, cpCurveColor));
+        // workaround end
         while (FControls.size() > 0) {
             VBox.getChildren().remove(FControls.get(0));
             FControls.remove(0);
