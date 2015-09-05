@@ -6,7 +6,7 @@ import Curves.CustomCurveDefinition;
 public class SecondDegreePolynomialFunctionDefinition extends CustomCurveDefinition {
 
     public SecondDegreePolynomialFunctionDefinition() {
-        super("y=ax²+bx+c", "Second Degree Polynomial Function", "Second degree polynomial function like y=ax²+bx+c");
+        super("y=ax^2+bx+c", "Second Degree Polynomial Function", "Second degree polynomial function like y=ax^2+bx+c");
         addParameter(CurveParameterDefinition.Kind.Y, "y");
         addParameter(CurveParameterDefinition.Kind.X, "x");
         addParameter(CurveParameterDefinition.Kind.Factor, "a");

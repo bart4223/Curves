@@ -19,6 +19,7 @@ public class CurveControlStageController extends NGStageController {
 
     @FXML
     protected void handleRemove(){
+        Invoke("Curve", "RemoveCurrent");
     }
 
     @FXML
@@ -37,21 +38,27 @@ public class CurveControlStageController extends NGStageController {
     public void handlecbCurves(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
             NGObjectRequestItem aRequest = newObjectRequest("Curve", "CurrentCurve");
-            ComboboxText text = (ComboboxText)cbCurves.getSelectionModel().getSelectedItem();
-            aRequest.addParam("aID", text.getId());
-            Invoke(aRequest);
+            if (cbCurves.getSelectionModel().getSelectedItem() != null) {
+                ComboboxText text = (ComboboxText)cbCurves.getSelectionModel().getSelectedItem();
+                aRequest.addParam("aID", text.getId());
+                Invoke(aRequest);
+            }
         }
     }
 
     public void setCurrentCurve(CustomCurve aCurve) {
-        for (Object obj : cbCurves.getItems()) {
-            ComboboxText text = (ComboboxText)obj;
-            if (text.getId().equals(aCurve.getID())) {
-                cbCurves.getSelectionModel().select(text);
-                cbCurves.setTooltip(new Tooltip(aCurve.getDescription()));
-                break;
+        if (aCurve != null) {
+            for (Object obj : cbCurves.getItems()) {
+                ComboboxText text = (ComboboxText)obj;
+                if (text.getId().equals(aCurve.getID())) {
+                    cbCurves.getSelectionModel().select(text);
+                    cbCurves.setTooltip(new Tooltip(aCurve.getDescription()));
+                    break;
+                }
             }
         }
+        else
+            cbCurves.getSelectionModel().clearSelection();
     }
 
     public void addCurve(CustomCurve aCurve) {
@@ -60,13 +67,27 @@ public class CurveControlStageController extends NGStageController {
     }
 
     public void CurveChanged(CustomCurve aCurve) {
+        if (aCurve != null) {
+            for (Object obj : cbCurves.getItems()) {
+                ComboboxText text = (ComboboxText) obj;
+                if (text.getId().equals(aCurve.getID()) && text.getName() != aCurve.getName()) {
+                    ComboboxText newtext = new ComboboxText(aCurve.getID(), aCurve.getName());
+                    cbCurves.getItems().add(newtext);
+                    if (cbCurves.getSelectionModel().getSelectedItem().equals(text))
+                        cbCurves.getSelectionModel().select(newtext);
+                    cbCurves.getItems().remove(text);
+                    break;
+                }
+            }
+        }
+        else
+            cbCurves.getSelectionModel().clearSelection();
+    }
+
+    public void CurveRemoved(CustomCurve aCurve) {
         for (Object obj : cbCurves.getItems()) {
-            ComboboxText text = (ComboboxText)obj;
-            if (text.getId().equals(aCurve.getID()) && text.getName() != aCurve.getName()) {
-                ComboboxText newtext = new ComboboxText(aCurve.getID(), aCurve.getName());
-                cbCurves.getItems().add(newtext);
-                if (cbCurves.getSelectionModel().getSelectedItem().equals(text))
-                    cbCurves.getSelectionModel().select(newtext);
+            ComboboxText text = (ComboboxText) obj;
+            if (text.getId().equals(aCurve.getID())) {
                 cbCurves.getItems().remove(text);
                 break;
             }

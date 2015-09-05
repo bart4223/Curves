@@ -119,6 +119,13 @@ public class CurveManager extends NGComponent {
         }
     }
 
+    protected synchronized void raiseCurveRemovedEvent(CustomCurve aCurve) {
+        CurveEvent event = new CurveEvent(this, aCurve);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleCurveRemoved(event);
+        }
+    }
+
     protected synchronized void raiseCurveCalculatedEvent(CustomCurve aCurve) {
         CurveEvent event = new CurveEvent(this, aCurve);
         for (CurveEventListener listener : FEventListeners) {
@@ -153,7 +160,8 @@ public class CurveManager extends NGComponent {
 
     public void setCurrentCurve(CustomCurve aCurve) {
         FCurrentCurve = aCurve;
-        writeInfo(String.format("Current curve is [%s]",FCurrentCurve.getName()));
+        if (FCurrentCurve != null)
+            writeInfo(String.format("Current curve is [%s]",FCurrentCurve.getName()));
         raiseCurrentCurveChangedEvent(FCurrentCurve);
     }
 
@@ -188,6 +196,21 @@ public class CurveManager extends NGComponent {
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
         setCurrentCurve(aCurve);
+    }
+
+    public void removeCurrentCurve() {
+        removeCurve(getCurrentCurve());
+    }
+
+    public void removeCurve(CustomCurve aCurve) {
+        if (aCurve != null) {
+            setCurrentCurve(null);
+            FCurves.remove(aCurve);
+            writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] removed", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
+            raiseCurveRemovedEvent(aCurve);
+            if (FCurves.size() > 0)
+                setCurrentCurve(FCurves.get(0));
+        }
     }
 
     public void addEventListener(CurveEventListener aListener)  {

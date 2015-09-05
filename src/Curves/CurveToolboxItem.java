@@ -45,6 +45,12 @@ public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventL
     }
 
     @Override
+    public void handleCurveRemoved(CurveEvent e) {
+        if (e.getCurve().equals(((CurveToolboxContext)FContext).getCurve()))
+            CloseStage();
+    }
+
+    @Override
     public void handleCurveCalculated(CurveEvent e) {
         CurveToolboxController sc = (CurveToolboxController)FStageController;
         sc.UpdateStage(e.getCurve());

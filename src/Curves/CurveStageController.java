@@ -5,6 +5,7 @@ import Curves.Graphics.Curve2DDisplayController;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.*;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -50,7 +51,7 @@ public class CurveStageController extends NGStageController {
         canvas.setWidth(AnchorPane0.getWidth());
         AnchorPane0.getChildren().add(canvas);
         if (aCurve instanceof Curve2D) {
-            Curve2DDisplayController dccurve = new Curve2DDisplayController(canvas, String.format("Curve.%s",aCurve.getName()));
+            Curve2DDisplayController dccurve = new Curve2DDisplayController(canvas, String.format("Curve.%s",aCurve.getID()));
             dccurve.Curve = (Curve2D)aCurve;
             registerDisplayController(dccurve, true);
         }
@@ -61,6 +62,23 @@ public class CurveStageController extends NGStageController {
             NGDisplayController dc = dcitem.getDisplayController();
             if (dc instanceof Curve2DDisplayController && ((Curve2DDisplayController)dc).Curve.equals(aCurve)) {
                 RenderScene(dcitem);
+                break;
+            }
+        }
+    }
+
+    public void RemoveCurve(CustomCurve aCurve) {
+        for (DisplayControllerItem dcitem : FDCItems) {
+            NGDisplayController dc = dcitem.getDisplayController();
+            if (dc instanceof Curve2DDisplayController && ((Curve2DDisplayController)dc).Curve.equals(aCurve)) {
+                for (Node node : AnchorPane0.getChildren()) {
+                    if (node.equals(dc.getCanvas())) {
+                        AnchorPane0.getChildren().remove(node);
+                        break;
+                    }
+                }
+                unregisterDisplayController(dc);
+                break;
             }
         }
     }

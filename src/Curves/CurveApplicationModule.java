@@ -38,6 +38,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
     protected void registerObjectRequests() {
         NGObjectRequestMethod requestMethod = registerObjectRequest("Curve", FCurveManager, "CurrentCurve", "setCurrentCurveByID");
         requestMethod.addParam("aID", NGObjectRequestParameter.ParamKind.String);
+        registerObjectRequest("Curve", FCurveManager, "RemoveCurrent", "removeCurrentCurve");
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
     }
 
