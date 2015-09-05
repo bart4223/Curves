@@ -19,6 +19,7 @@ public abstract class CustomCurve extends NGObject {
     protected String FID;
     protected String FName;
     protected Color FLineColor;
+    protected Integer FLineSize;
 
     protected void writeInfo(String aInfo) {
         writeInfo(0, aInfo);
@@ -107,6 +108,7 @@ public abstract class CustomCurve extends NGObject {
         FParameterValues = new CurveParameterValueList();
         FSolveParameterValues = new CurveParameterValueList();
         FLineColor = Color.BLACK;
+        FLineSize = 1;
     }
 
     public CurveManager getCurveManager() {
@@ -156,6 +158,14 @@ public abstract class CustomCurve extends NGObject {
 
     public Color getLineColor() {
         return FLineColor;
+    }
+
+    public void setLineSize(Integer aLineSize) {
+        FLineSize = aLineSize;
+    }
+
+    public Integer getLineSize() {
+        return FLineSize;
     }
 
     public void setParameterValue(String aName, double aValue) {

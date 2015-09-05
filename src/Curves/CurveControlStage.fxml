@@ -10,5 +10,7 @@
         <Button id="btnRemove" prefWidth="80" text="Remove" onAction="#handleRemove" fx:id="btnRemove" />
         <ComboBox id="cbCurves" prefWidth="200" onAction="#handlecbCurves" fx:id="cbCurves" />
         <Button id="btnProps" prefWidth="20" text="..." onAction="#handleProps" fx:id="btnProps" />
+        <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
+        <ComboBox id="cbLineSizes" prefWidth="40" onAction="#handlecbLineSizes" fx:id="cbLineSizes" />
     </HBox>
 </AnchorPane>

@@ -14,7 +14,16 @@ public class CurveControlStageController extends NGStageController {
     private ComboBox cbCurves;
 
     @FXML
+    private ComboBox cbLineSizes;
+
+    @FXML
+    protected void handleHelp(){
+
+    }
+
+    @FXML
     protected void handleAdd(){
+
     }
 
     @FXML
@@ -27,15 +36,8 @@ public class CurveControlStageController extends NGStageController {
         Invoke("CurveModule", "CurveToolbox");
     }
 
-    public CurveControlStageController() {
-        this(null);
-    }
-
-    public CurveControlStageController(NGCustomStageItem aStageItem) {
-        super(aStageItem);
-    }
-
-    public void handlecbCurves(ActionEvent actionEvent) {
+    @FXML
+    protected void handlecbCurves(ActionEvent actionEvent) {
         if (actionEvent.getEventType().equals(ActionEvent.ACTION)) {
             NGObjectRequestItem aRequest = newObjectRequest("Curve", "CurrentCurve");
             if (cbCurves.getSelectionModel().getSelectedItem() != null) {
@@ -44,6 +46,31 @@ public class CurveControlStageController extends NGStageController {
                 Invoke(aRequest);
             }
         }
+    }
+
+    @FXML
+    protected void handlecbLineSizes(ActionEvent actionEvent) {
+        if (actionEvent.getEventType().equals(ActionEvent.ACTION) && cbLineSizes.getValue() != null) {
+            NGObjectRequestItem aRequest = newObjectRequest("Curve", "LineSize");
+            Integer lineSize = Integer.parseInt(cbLineSizes.getValue().toString());
+            aRequest.addParam("aLineSize", lineSize);
+            Invoke(aRequest);
+        }
+    }
+
+    protected void DoInitialize() {
+        super.DoInitialize();
+        for (int i = 1; i <= 5; i++)
+            cbLineSizes.getItems().add(i);
+        cbLineSizes.getSelectionModel().select("1");
+    }
+
+    public CurveControlStageController() {
+        this(null);
+    }
+
+    public CurveControlStageController(NGCustomStageItem aStageItem) {
+        super(aStageItem);
     }
 
     public void setCurrentCurve(CustomCurve aCurve) {

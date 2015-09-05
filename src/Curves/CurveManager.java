@@ -256,4 +256,11 @@ public class CurveManager extends NGComponent {
         InternalCalculateCurve(aCurve);
     }
 
+    public void setAllCurveLineSize(Integer aLineSize) {
+        for (CustomCurve curve : FCurves) {
+            curve.setLineSize(aLineSize);
+            raiseCurveChangedEvent(curve);
+        }
+    }
+
 }

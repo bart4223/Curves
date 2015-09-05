@@ -56,6 +56,7 @@ public class CartesianCoordinateSystem2DDisplayController extends NGDisplayContr
         super(aCanvas, aName);
         Distance = 10;
         StrokeLength = 10;
+        FPixelSize = 1;
     }
 
     public int Distance;

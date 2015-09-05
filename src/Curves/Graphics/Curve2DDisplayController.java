@@ -18,7 +18,7 @@ public class Curve2DDisplayController extends NGDisplayController {
         super.DoRender();
         if (Curve != null) {
             FGC.setStroke(Curve.getLineColor());
-            FGC.setLineWidth(FPixelSize);
+            FGC.setLineWidth(Curve.getLineSize());
             FGC.beginPath();
             int index = 0;
             for (NGPoint2D point: Curve.getPoints()) {
@@ -42,7 +42,6 @@ public class Curve2DDisplayController extends NGDisplayController {
     public Curve2DDisplayController(Canvas aCanvas, String aName) {
         super(aCanvas, aName);
         Curve = null;
-        FPixelSize = 2;
     }
 
     public Curve2D Curve;
