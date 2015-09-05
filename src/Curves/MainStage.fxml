@@ -7,6 +7,7 @@
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
         <Button id="btnAdd" prefWidth="80" text="Add" onAction="#handleAdd" fx:id="btnAdd" />
         <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
+        <Button id="btnShow" prefWidth="80" text="Show" onAction="#handleShow" fx:id="btnShow" />
         <Button id="btnQuit" prefWidth="80" text="Quit" onAction="#handleQuit" fx:id="btnQuit" />
     </HBox>
 </AnchorPane>

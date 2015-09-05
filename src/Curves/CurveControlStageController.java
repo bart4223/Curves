@@ -18,7 +18,7 @@ public class CurveControlStageController extends NGStageController {
 
     @FXML
     protected void handleHelp(){
-
+        Invoke("CurveModule", "Help");
     }
 
     @FXML

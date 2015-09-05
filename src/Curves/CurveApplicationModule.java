@@ -5,6 +5,7 @@ import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
 import Uniwork.Base.NGObjectRequestMethod;
 import Uniwork.Base.NGObjectRequestParameter;
+import Uniwork.UI.NGUIHelpToolboxContext;
 
 public class CurveApplicationModule extends NGVisualApplicationModule {
 
@@ -42,6 +43,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         requestMethod.addParam("aLineSize", NGObjectRequestParameter.ParamKind.Integer);
         registerObjectRequest("Curve", FCurveManager, "RemoveCurrent", "removeCurrentCurve");
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
+        registerObjectRequest("CurveModule", this, "Help", "ShowHelp");
     }
 
     public CurveApplicationModule(NGComponent aOwner, String aName) {
@@ -50,6 +52,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FStageManager.registerItemClass("Curve", "Curves.CurveStageItem");
         FStageManager.registerItemClass("Control", "Curves.CurveControlStageItem");
         FStageManager.registerItemClass("Console", "Uniwork.UI.NGUIConsoleStageItem");
+        FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
         FToolboxManager.registerItemClass("Curve", "Curves.CurveToolboxItem");
     }
 
@@ -65,6 +68,10 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
             NGCustomStageItem tb = FToolboxManager.ShowToolbox("Curve", curve.getName(), getDescription(), new CurveToolboxContext(curve));
             FCurveManager.addEventListener((CurveEventListener)tb);
         }
+    }
+
+    public void ShowHelp() {
+        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/curve.txt")));
     }
 
 }

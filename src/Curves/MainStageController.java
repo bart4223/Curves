@@ -17,6 +17,11 @@ public class MainStageController extends NGStageController {
     }
 
     @FXML
+    protected void handleShow(){
+        Invoke("Application", "ShowStages");
+    }
+
+    @FXML
     protected void handleHelp(){
         Invoke("Main", "Help");
     }

@@ -1,0 +1,1 @@
+Too show a new curve press add and select a curve definition.
