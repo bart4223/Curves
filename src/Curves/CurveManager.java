@@ -162,6 +162,8 @@ public class CurveManager extends NGComponent {
         FCurrentCurve = aCurve;
         if (FCurrentCurve != null)
             writeInfo(String.format("Current curve is [%s]",FCurrentCurve.getName()));
+        else
+            writeInfo("No current curve");
         raiseCurrentCurveChangedEvent(FCurrentCurve);
     }
 
