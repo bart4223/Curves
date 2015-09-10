@@ -3,4 +3,5 @@
 <AnchorPane fx:controller="Curves.CurveStageController" xmlns:fx="http://javafx.com/fxml" fx:id="AnchorPane0" style="-fx-background-color: white;">
     <Canvas id="Layer0" height="800" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" fx:id="Layer0" />
     <Canvas id="Layer1" height="800" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" fx:id="Layer1" />
+    <Canvas id="LayerTop" height="800" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" fx:id="LayerTop" />
 </AnchorPane>

@@ -2,11 +2,14 @@ package Curves;
 
 import Curves.Graphics.CartesianCoordinateSystem2DDisplayController;
 import Curves.Graphics.Curve2DDisplayController;
+import Curves.Graphics.CurveInfoDisplayController;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Visuals.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -20,6 +23,21 @@ public class CurveStageController extends NGStageController {
 
     @FXML
     private Canvas Layer1;
+
+    @FXML
+    private Canvas LayerTop;
+
+    @Override
+    protected void DoInitialize() {
+        super.DoInitialize();
+        LayerTop.addEventHandler(MouseEvent.MOUSE_MOVED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent t) {
+                        HandleMouseMoved(t);
+                    }
+                });
+    }
 
     @Override
     protected void CreateDisplayController() {
@@ -35,6 +53,15 @@ public class CurveStageController extends NGStageController {
         dcCCS.setView(dv);
         dcCCS.Distance = dcgrid.GridDistance;
         registerDisplayController(dcCCS);
+        CurveInfoDisplayController dcCI = new CurveInfoDisplayController(LayerTop, "CI");
+        dcCI.setView(dv);
+        registerDisplayController(dcCI);
+    }
+
+    protected void HandleMouseMoved(MouseEvent t) {
+        CurveInfoDisplayController dcCI = (CurveInfoDisplayController)getDisplayController("CI");
+        dcCI.setMousePos(t.getX(), t.getY());
+        RenderScene(dcCI);
     }
 
     public CurveStageController() {
@@ -49,7 +76,7 @@ public class CurveStageController extends NGStageController {
         Canvas canvas = new Canvas();
         canvas.setHeight(AnchorPane0.getHeight());
         canvas.setWidth(AnchorPane0.getWidth());
-        AnchorPane0.getChildren().add(canvas);
+        AnchorPane0.getChildren().add(AnchorPane0.getChildren().size() - 2, canvas);
         if (aCurve instanceof Curve2D) {
             Curve2DDisplayController dccurve = new Curve2DDisplayController(canvas, String.format("Curve.%s",aCurve.getID()));
             dccurve.Curve = (Curve2D)aCurve;
