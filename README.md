@@ -32,3 +32,4 @@ Version history
     30.08.15    First curve toolbox
     03.09.15    Rename curve in toolbox
     05.09.15    Remove curve
+    10.09.15    Runtime application definition added

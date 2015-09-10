@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_25" class="java.beans.XMLDecoder">
+ <object class="Uniwork.Appl.NGApplicationDefinition">
+  <void property="modules">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="Uniwork.Appl.NGApplicationModuleItemDefinition">
+      <void property="className">
+       <string>Curves.CurveApplicationModule</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
