@@ -78,4 +78,8 @@ public abstract class CustomCurveDefinition extends NGObject {
         return def.addDefinitionArea(aMin, aMax);
     }
 
+    public Class getDefaultSolutionProcedure() {
+        return null;
+    }
+
 }

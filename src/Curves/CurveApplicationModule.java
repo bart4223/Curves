@@ -43,6 +43,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         requestMethod.addParam("aLineSize", NGObjectRequestParameter.ParamKind.Integer);
         registerObjectRequest("Curve", FCurveManager, "RemoveCurrent", "removeCurrentCurve");
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
+        registerObjectRequest("CurveModule", this, "AddCurveToolbox", "AddCurve");
         registerObjectRequest("CurveModule", this, "Help", "ShowHelp");
     }
 
@@ -54,6 +55,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FStageManager.registerItemClass("Console", "Uniwork.UI.NGUIConsoleStageItem");
         FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
         FToolboxManager.registerItemClass("Curve", "Curves.CurveToolboxItem");
+        FToolboxManager.registerItemClass("AddCurve", "Curves.AddCurveToolboxItem");
     }
 
     protected CurveManager getCurveManager() {
@@ -68,6 +70,10 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
             NGCustomStageItem tb = FToolboxManager.ShowToolbox("Curve", curve.getName(), getDescription(), new CurveToolboxContext(curve));
             FCurveManager.addEventListener((CurveEventListener)tb);
         }
+    }
+
+    public void AddCurve() {
+        FToolboxManager.ShowToolbox("AddCurve", String.format("%s.AddToolbox", getDescription()), FCurveManager);
     }
 
     public void ShowHelp() {

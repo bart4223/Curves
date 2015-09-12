@@ -39,6 +39,10 @@ public class Curve2D extends CustomCurve {
         }
     }
 
+    public Curve2D(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition) {
+        this(aCurveManager, aName, aDefinition, null);
+    }
+
     public Curve2D(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
         super(aCurveManager, aName, aDefinition, aSolutionProcedure);
         FPoints = new ArrayList<NGPoint2D>();

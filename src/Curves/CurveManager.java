@@ -1,9 +1,5 @@
 package Curves;
 
-import Curves.Definitions.FirstDegreePolynomialFunctionDefinition;
-import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
-import Curves.Solutions.FirstDegreePolynomialFunctionSolutionProcedure;
-import Curves.Solutions.SecondDegreePolynomialFunctionSolutionProcedure;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
@@ -19,45 +15,6 @@ public class CurveManager extends NGComponent {
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
-        // CurveSolution I
-        CustomCurveSolutionProcedure proc = new FirstDegreePolynomialFunctionSolutionProcedure();
-        proc.setLogManager(FLogManager);
-        // Curve I.1
-        Curve2D curve = new Curve2D(this, "First", new FirstDegreePolynomialFunctionDefinition(), proc);
-        curve.addDefinitionArea("a", -10.0, 10.0);
-        curve.addDefinitionArea("b", -400.0, 400.0);
-        curve.addDefinitionArea("x", -400.0, 400.0);
-        //curve.addDefinitionArea("y", -400.0, 400.0);
-        curve.setLineColor(Color.BLUE);
-        curve.setParameterValue("a", 1.0);
-        curve.setParameterValue("b", 0.0);
-        addCurve(curve);
-        FCurrentCurve = curve;
-        // Curve I.2
-        curve = new Curve2D(this, "Second", new FirstDegreePolynomialFunctionDefinition(), proc);
-        curve.addDefinitionArea("a", -10.0, 10.0);
-        curve.addDefinitionArea("b", -400.0, 400.0);
-        curve.addDefinitionArea("x", -400.0, 400.0);
-        //curve.addDefinitionArea("y", -400.0, 400.0);
-        curve.setLineColor(Color.RED);
-        curve.setParameterValue("a", 0.5);
-        curve.setParameterValue("b", 100.0);
-        addCurve(curve);
-        // CurveSolution II
-        proc = new SecondDegreePolynomialFunctionSolutionProcedure();
-        proc.setLogManager(FLogManager);
-        // Curve II.1
-        curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition(), proc);
-        curve.addDefinitionArea("a", -10.0, 10.0);
-        curve.addDefinitionArea("b", -100.0, 100.0);
-        curve.addDefinitionArea("c", -400.0, 400.0);
-        curve.addDefinitionArea("x", -400.0, 400.0);
-        //curve.addDefinitionArea("y", -400.0, 400.0);
-        curve.setLineColor(Color.GREEN);
-        curve.setParameterValue("a", 0.25);
-        curve.setParameterValue("b", 0.0);
-        curve.setParameterValue("c", 0.0);
-        addCurve(curve);
     }
 
     protected void BeginCalculateCurve(CustomCurve aCurve) {
@@ -198,6 +155,7 @@ public class CurveManager extends NGComponent {
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
         setCurrentCurve(aCurve);
+        CalculateCurve(aCurve);
     }
 
     public void removeCurrentCurve() {

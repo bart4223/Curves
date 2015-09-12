@@ -95,6 +95,10 @@ public abstract class CustomCurve extends NGObject {
         return FSolveParameterValues.getValue(aName);
     }
 
+    public CustomCurve(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition) {
+        this(aCurveManager, aName, aDefinition, null);
+    }
+
     public CustomCurve(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
         super();
         FCurveManager = aCurveManager;
@@ -105,6 +109,15 @@ public abstract class CustomCurve extends NGObject {
         }
         FDefinition = aDefinition;
         FSolutionProcedure = aSolutionProcedure;
+        if (FSolutionProcedure == null) {
+            try {
+                FSolutionProcedure = (CustomCurveSolutionProcedure)FDefinition.getDefaultSolutionProcedure().getConstructor().newInstance();
+                FSolutionProcedure.setLogManager(aCurveManager.getLogManager());
+            }
+            catch (Exception e) {
+                writeError(e.getMessage());
+            }
+        }
         FParameterValues = new CurveParameterValueList();
         FSolveParameterValues = new CurveParameterValueList();
         FLineColor = Color.BLACK;

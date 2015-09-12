@@ -2,6 +2,7 @@ package Curves.Definitions;
 
 import Curves.CurveParameterDefinition;
 import Curves.CustomCurveDefinition;
+import Curves.Solutions.SecondDegreePolynomialFunctionSolutionProcedure;
 
 public class SecondDegreePolynomialFunctionDefinition extends CustomCurveDefinition {
 
@@ -12,6 +13,10 @@ public class SecondDegreePolynomialFunctionDefinition extends CustomCurveDefinit
         addParameter(CurveParameterDefinition.Kind.Factor, "a");
         addParameter(CurveParameterDefinition.Kind.Factor, "b");
         addParameter(CurveParameterDefinition.Kind.Factor, "c");
+    }
+
+    public Class getDefaultSolutionProcedure() {
+        return SecondDegreePolynomialFunctionSolutionProcedure.class;
     }
 
 }
