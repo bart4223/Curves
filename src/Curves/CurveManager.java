@@ -12,6 +12,7 @@ public class CurveManager extends NGComponent {
     protected ArrayList<CustomCurve> FCurves;
     protected ArrayList<CurveEventListener> FEventListeners;
     protected CustomCurve FCurrentCurve;
+    protected Integer FCurveLineSize;
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
@@ -148,9 +149,11 @@ public class CurveManager extends NGComponent {
         FEventListeners = new ArrayList<CurveEventListener>();
         FLogManager = new NGLogManager();
         FCurrentCurve = null;
+        FCurveLineSize = 1;
     }
 
     public void addCurve(CustomCurve aCurve) {
+        aCurve.setLineSize(FCurveLineSize);
         FCurves.add(aCurve);
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
@@ -217,8 +220,9 @@ public class CurveManager extends NGComponent {
     }
 
     public void setAllCurveLineSize(Integer aLineSize) {
+        FCurveLineSize = aLineSize;
         for (CustomCurve curve : FCurves) {
-            curve.setLineSize(aLineSize);
+            curve.setLineSize(FCurveLineSize);
             raiseCurveChangedEvent(curve);
         }
     }

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,6 +49,9 @@ public class AddCurveToolboxController extends NGToolboxController {
 
     @FXML
     private VBox VBox;
+
+    @FXML
+    private Text lFormula;
 
     @FXML
     protected void handlecbCurveDefs(ActionEvent actionEvent) {
@@ -106,6 +110,7 @@ public class AddCurveToolboxController extends NGToolboxController {
             String classname = cbCurveDefs.getSelectionModel().getSelectedItem().toString();
             try {
                 CustomCurveDefinition def = (CustomCurveDefinition)CurveManager.getClass().getClassLoader().loadClass(classname).getConstructor().newInstance();
+                lFormula.setText(def.getFormula());
                 Iterator<CurveParameterDefinition> itr = def.getParameters();
                 while (itr.hasNext()) {
                     CurveParameterDefinition paramdef = itr.next();
