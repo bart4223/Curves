@@ -9,9 +9,11 @@ Configuration
 
     File /resources/config.ccf:
         
-        Debuglevel = Debugger level >= 0
-        ConsoleShowLogEntrySource = Show the source of log entry
-        ConsoleShowLog = Show the log entries in console
+        Debuglevel                      = Debugger level >= 0
+        ConsoleShowLogEntrySource       = Show the source of log entry
+        ConsoleShowLog                  = Show the log entries in console
+        DefinitionFilename              = Filename of definition *.adf
+        CurveStage.AlternateGridColor   = Show alternate grid color in curve stage
 
 Version history
 ===============
