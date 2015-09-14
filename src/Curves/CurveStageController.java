@@ -110,4 +110,10 @@ public class CurveStageController extends NGStageController {
         }
     }
 
+    public void ToggleGrid() {
+        NGGrid2DDisplayController dcgrid = (NGGrid2DDisplayController)getDisplayController("Grid");
+        dcgrid.DrawGrid = !dcgrid.DrawGrid;
+        RenderScene(dcgrid);
+    }
+
 }

@@ -20,7 +20,7 @@ public class AddCurveToolboxItem extends NGCustomToolboxItem {
         FFXMLName = "AddCurveToolbox.fxml";
         FWidth = 400;
         FHeight = 600;
-        FPosition.setX(1050);
+        FPosition.setX(1075);
         FPosition.setY(300);
         FUnique = true;
     }

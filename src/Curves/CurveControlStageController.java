@@ -14,9 +14,6 @@ public class CurveControlStageController extends NGStageController {
     private ComboBox cbCurves;
 
     @FXML
-    private ComboBox cbLineSizes;
-
-    @FXML
     protected void handleHelp(){
         Invoke("CurveModule", "Help");
     }
@@ -32,8 +29,13 @@ public class CurveControlStageController extends NGStageController {
     }
 
     @FXML
-    protected void handleProps(){
+    protected void handleCurveProps(){
         Invoke("CurveModule", "CurveToolbox");
+    }
+
+    @FXML
+    protected void handleProps(){
+        Invoke("CurveModule", "CurveManagerToolbox");
     }
 
     @FXML
@@ -46,23 +48,6 @@ public class CurveControlStageController extends NGStageController {
                 Invoke(aRequest);
             }
         }
-    }
-
-    @FXML
-    protected void handlecbLineSizes(ActionEvent actionEvent) {
-        if (actionEvent.getEventType().equals(ActionEvent.ACTION) && cbLineSizes.getValue() != null) {
-            NGObjectRequestItem aRequest = newObjectRequest("Curve", "LineSize");
-            Integer lineSize = Integer.parseInt(cbLineSizes.getValue().toString());
-            aRequest.addParam("aLineSize", lineSize);
-            Invoke(aRequest);
-        }
-    }
-
-    protected void DoInitialize() {
-        super.DoInitialize();
-        for (int i = 1; i <= 5; i++)
-            cbLineSizes.getItems().add(i);
-        cbLineSizes.getSelectionModel().select("1");
     }
 
     public CurveControlStageController() {

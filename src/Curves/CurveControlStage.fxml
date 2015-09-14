@@ -9,8 +9,8 @@
         <Button id="btnAdd" prefWidth="80" text="Add" onAction="#handleAdd" fx:id="btnAdd" />
         <Button id="btnRemove" prefWidth="80" text="Remove" onAction="#handleRemove" fx:id="btnRemove" />
         <ComboBox id="cbCurves" prefWidth="200" onAction="#handlecbCurves" fx:id="cbCurves" />
-        <Button id="btnProps" prefWidth="20" text="..." onAction="#handleProps" fx:id="btnProps" />
+        <Button id="btnCurveProps" prefWidth="20" text="..." onAction="#handleCurveProps" fx:id="btnCurveProps" />
         <Button id="btnHelp" prefWidth="80" text="Help" onAction="#handleHelp" fx:id="btnHelp" />
-        <ComboBox id="cbLineSizes" prefWidth="40" onAction="#handlecbLineSizes" fx:id="cbLineSizes" />
+        <Button id="btnProps" prefWidth="80" text="Props" onAction="#handleProps" fx:id="btnProps" />
     </HBox>
 </AnchorPane>

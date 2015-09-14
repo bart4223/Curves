@@ -1,6 +1,7 @@
 package Curves;
 
 import Uniwork.Appl.NGCustomStageItem;
+import Uniwork.Appl.NGCustomToolboxItem;
 import Uniwork.Appl.NGVisualApplicationModule;
 import Uniwork.Base.NGComponent;
 import Uniwork.Base.NGObjectRequestMethod;
@@ -45,6 +46,8 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
         registerObjectRequest("CurveModule", this, "AddCurveToolbox", "AddCurve");
         registerObjectRequest("CurveModule", this, "Help", "ShowHelp");
+        registerObjectRequest("CurveModule", this, "CurveManagerToolbox", "ToggleProps");
+        registerObjectRequest("CurveModule", this, "CurveGrid", "ToggleGrid");
     }
 
     public CurveApplicationModule(NGComponent aOwner, String aName) {
@@ -55,6 +58,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FStageManager.registerItemClass("Console", "Uniwork.UI.NGUIConsoleStageItem");
         FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
         FToolboxManager.registerItemClass("Curve", "Curves.CurveToolboxItem");
+        FToolboxManager.registerItemClass("CurveManager", "Curves.CurveManagerToolboxItem");
         FToolboxManager.registerItemClass("AddCurve", "Curves.AddCurveToolboxItem");
     }
 
@@ -78,6 +82,17 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
 
     public void ShowHelp() {
         FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/curve.txt")));
+    }
+
+    public void ToggleProps() {
+        NGCustomStageItem item = FToolboxManager.CreateToolbox("CurveManager", String.format("%s.Props", getDescription()));
+        item.setPosition(2325, 300);
+        item.ToogleShow();
+    }
+
+    public void ToggleGrid() {
+        CurveStageItem item = (CurveStageItem)FStageManager.getItem("Curve");
+        item.ToggleGrid();
     }
 
 }

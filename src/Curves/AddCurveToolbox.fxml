@@ -8,8 +8,8 @@
 <AnchorPane fx:controller="Curves.AddCurveToolboxController" xmlns:fx="http://javafx.com/fxml" fx:id="AnchorPane0" style="-fx-background-color: lightgray;">
     <VBox id="VBox" prefHeight="600" prefWidth="400" alignment="TOP_LEFT" spacing="15" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: lightgray" fx:id="VBox">
         <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-        <TextField id="edName" fx:id="edName"/>
         <ComboBox id="cbCurveDefs" prefWidth="400" onAction="#handlecbCurveDefs" fx:id="cbCurveDefs" />
+        <TextField id="edName" fx:id="edName"/>
         <Text id="lFormula" fx:id="lFormula"/>
         <Button id="btnAdd" prefWidth="400" text="Add" onAction="#handleAdd" fx:id="btnAdd" />
     </VBox>

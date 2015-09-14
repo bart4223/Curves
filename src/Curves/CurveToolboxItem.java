@@ -29,7 +29,7 @@ public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventL
         FFXMLName = "CurveToolbox.fxml";
         FWidth = 400;
         FHeight = 400;
-        FPosition.setX(1050);
+        FPosition.setX(1075);
         FPosition.setY(300);
         FUnique = true;
     }

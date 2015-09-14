@@ -42,4 +42,9 @@ public class CurveStageItem extends NGCustomStageItem implements CurveEventListe
 
     }
 
+    public void ToggleGrid() {
+        CurveStageController sc = (CurveStageController)FStageController;
+        sc.ToggleGrid();
+    }
+
 }
