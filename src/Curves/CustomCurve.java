@@ -20,6 +20,7 @@ public abstract class CustomCurve extends NGObject {
     protected String FName;
     protected Color FLineColor;
     protected Integer FLineSize;
+    protected Double FScale;
 
     protected void writeInfo(String aInfo) {
         writeInfo(0, aInfo);
@@ -62,7 +63,7 @@ public abstract class CustomCurve extends NGObject {
                 Iterator<CurveParameterDefinitionArea> itr = paramX.getDefinitionAreas();
                 while (itr.hasNext()) {
                     CurveParameterDefinitionArea area = itr.next();
-                    for (double x = area.getMin(); x <= area.getMax(); x = x + 1.0) {
+                    for (double x = area.getMin() * FScale; x <= area.getMax() * FScale; x = x + FScale) {
                         DoBeforeCalculate(aProblemName);
                         try {
                             setSolveParameterValue(paramX.getName(), x);
@@ -122,6 +123,7 @@ public abstract class CustomCurve extends NGObject {
         FSolveParameterValues = new CurveParameterValueList();
         FLineColor = Color.BLACK;
         FLineSize = 1;
+        FScale = 1.0;
     }
 
     public CurveManager getCurveManager() {
@@ -179,6 +181,14 @@ public abstract class CustomCurve extends NGObject {
 
     public Integer getLineSize() {
         return FLineSize;
+    }
+
+    public void setScale(Double aScale) {
+        FScale = aScale;
+    }
+
+    public Double getScale() {
+        return FScale;
     }
 
     public void setParameterValue(String aName, double aValue) {

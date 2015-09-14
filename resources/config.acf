@@ -1,0 +1,4 @@
+ConsoleShowLog=true
+ConsoleShowLogEntrySource=false
+Debuglevel=5
+DefinitionFilename=resources/runtime/definition.adf

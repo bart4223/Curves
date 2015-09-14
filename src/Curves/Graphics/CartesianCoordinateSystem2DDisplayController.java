@@ -34,6 +34,7 @@ public class CartesianCoordinateSystem2DDisplayController extends NGDisplayContr
         }
         FGC.moveTo(0, (int) FCanvas.getHeight() / 2);
         FGC.lineTo(FCanvas.getWidth(), (int) FCanvas.getHeight() / 2);
+        index = 0;
         for (double x = 0.0; x <= FCanvas.getWidth(); x = x + Distance) {
             FGC.moveTo(x, (int) FCanvas.getHeight() / 2);
             if (index % 2 == 0)

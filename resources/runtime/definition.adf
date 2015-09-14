@@ -8,6 +8,9 @@
       <void property="className">
        <string>Curves.CurveApplicationModule</string>
       </void>
+      <void property="configurationFilename">
+       <string>resources/runtime/curve/config.amcf</string>
+      </void>
      </object>
     </void>
    </object>

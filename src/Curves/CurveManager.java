@@ -1,5 +1,6 @@
 package Curves;
 
+import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
@@ -13,9 +14,21 @@ public class CurveManager extends NGComponent {
     protected ArrayList<CurveEventListener> FEventListeners;
     protected CustomCurve FCurrentCurve;
     protected Integer FCurveLineSize;
+    protected Double FScale;
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
+        CustomCurve curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition());
+        curve.addDefinitionArea("a", -10.0, 10.0);
+        curve.addDefinitionArea("b", -100.0, 100.0);
+        curve.addDefinitionArea("c", -400.0, 400.0);
+        curve.addDefinitionArea("x", -400.0, 400.0);
+        curve.setLineColor(Color.GREEN);
+        curve.setParameterValue("a", 0.25);
+        curve.setParameterValue("b", 0.0);
+        curve.setParameterValue("c", 0.0);
+        addCurve(curve);
+        setAllCurveScale(0.1);
     }
 
     protected void BeginCalculateCurve(CustomCurve aCurve) {
@@ -150,6 +163,7 @@ public class CurveManager extends NGComponent {
         FLogManager = new NGLogManager();
         FCurrentCurve = null;
         FCurveLineSize = 1;
+        FScale = 1.0;
     }
 
     public void addCurve(CustomCurve aCurve) {
@@ -223,6 +237,14 @@ public class CurveManager extends NGComponent {
         FCurveLineSize = aLineSize;
         for (CustomCurve curve : FCurves) {
             curve.setLineSize(FCurveLineSize);
+            raiseCurveChangedEvent(curve);
+        }
+    }
+
+    public void setAllCurveScale(Double aScale) {
+        FScale = aScale;
+        for (CustomCurve curve : FCurves) {
+            curve.setScale(FScale);
             raiseCurveChangedEvent(curve);
         }
     }

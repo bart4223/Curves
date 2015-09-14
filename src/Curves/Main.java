@@ -21,7 +21,7 @@ public class Main extends NGApplication {
         super();
         FName = "Curves";
         FDescription = "Curves is a project to visualize and animate some mathematical functions";
-        FConfigurationFilename = "resources/config.ccf";
+        FConfigurationFilename = "resources/config.acf";
     }
 
     public static void main(String[] args) {

@@ -47,7 +47,7 @@ public class CurveStageController extends NGStageController {
         dcgrid.setView(dv);
         dcgrid.GridDistance = 20;
         dcgrid.GridColor = Color.DARKGRAY;
-        dcgrid.AlternateGridColor = getConfigurationPropertyAsBoolean("CurveStage.AlternateGridColor", false);
+        dcgrid.AlternateGridColor = getConfigurationPropertyAsBoolean("CurveApplicationModule.AlternateGridColor", false);
         registerDisplayController(dcgrid);
         CartesianCoordinateSystem2DDisplayController dcCCS = new CartesianCoordinateSystem2DDisplayController(Layer1, "CCS");
         dcCCS.setView(dv);

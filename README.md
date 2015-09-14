@@ -7,13 +7,18 @@ Curves is a project to visualize and animate some mathematical functions.
 Configuration
 ===============
 
-    File /resources/config.ccf:
+    File /resources/config.acf:
         
         Debuglevel                      = Debugger level >= 0
         ConsoleShowLogEntrySource       = Show the source of log entry
         ConsoleShowLog                  = Show the log entries in console
         DefinitionFilename              = Filename of definition *.adf
-        CurveStage.AlternateGridColor   = Show alternate grid color in curve stage
+        
+    File /resources/runtime/curve/config.amcf:
+        
+        AlternateGridColor              = Alternate grid color
+        DefinitionFilename              = Filename of module definition *.amdf
+    
 
 Version history
 ===============
