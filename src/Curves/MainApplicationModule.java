@@ -18,7 +18,7 @@ public class MainApplicationModule extends NGVisualApplicationModule {
     @Override
     protected void registerObjectRequests() {
         super.registerObjectRequests();
-        registerObjectRequest("Main", this, "Help", "ShowHelp");
+        registerObjectRequest("Main", this, "Help", "ToggleHelp");
     }
 
     public MainApplicationModule(NGComponent aOwner, String aName) {
@@ -28,8 +28,9 @@ public class MainApplicationModule extends NGVisualApplicationModule {
         FToolboxManager.registerItemClass("Help", "Uniwork.UI.NGUIHelpToolboxItem");
     }
 
-    public void ShowHelp() {
-        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/welcome.txt")));
+    public void ToggleHelp() {
+        NGCustomStageItem item = FToolboxManager.CreateToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/welcome.txt")));
+        item.ToggleShow();
     }
 
 }

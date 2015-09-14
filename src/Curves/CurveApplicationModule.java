@@ -45,7 +45,7 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         registerObjectRequest("Curve", FCurveManager, "RemoveCurrent", "removeCurrentCurve");
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
         registerObjectRequest("CurveModule", this, "AddCurveToolbox", "AddCurve");
-        registerObjectRequest("CurveModule", this, "Help", "ShowHelp");
+        registerObjectRequest("CurveModule", this, "Help", "ToggleHelp");
         registerObjectRequest("CurveModule", this, "CurveManagerToolbox", "ToggleProps");
         registerObjectRequest("CurveModule", this, "CurveGrid", "ToggleGrid");
     }
@@ -80,14 +80,15 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         FToolboxManager.ShowToolbox("AddCurve", String.format("%s.AddToolbox", getDescription()), FCurveManager);
     }
 
-    public void ShowHelp() {
-        FToolboxManager.ShowToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/curve.txt")));
+    public void ToggleHelp() {
+        NGCustomStageItem item = FToolboxManager.CreateToolbox("Help", String.format("%s.Help", getDescription()), new NGUIHelpToolboxContext(Application.LoadResourceFileContent("help/curve.txt")));
+        item.ToggleShow();
     }
 
     public void ToggleProps() {
         NGCustomStageItem item = FToolboxManager.CreateToolbox("CurveManager", String.format("%s.Props", getDescription()));
         item.setPosition(2325, 300);
-        item.ToogleShow();
+        item.ToggleShow();
     }
 
     public void ToggleGrid() {

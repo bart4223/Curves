@@ -28,7 +28,7 @@ public class CurveManager extends NGComponent {
         curve.setParameterValue("b", 0.0);
         curve.setParameterValue("c", 0.0);
         addCurve(curve);
-        //setAllCurveScale(0.1);
+        setAllCurveScale(0.1);
     }
 
     protected void BeginCalculateCurve(CustomCurve aCurve) {
