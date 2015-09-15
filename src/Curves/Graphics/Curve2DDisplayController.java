@@ -21,7 +21,7 @@ public class Curve2DDisplayController extends NGDisplayController {
             FGC.setLineWidth(Curve.getLineSize());
             FGC.beginPath();
             int index = 0;
-            for (NGPoint2D point: Curve.getPoints()) {
+            for (NGPoint2D point: Curve.getPointsWithScale()) {
                 if (index == 0)
                     FGC.moveTo(point.getXAsInt() + (int) FCanvas.getWidth() / 2, (int) FCanvas.getHeight() / 2 - point.getYAsInt());
                 else {

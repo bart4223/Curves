@@ -1,4 +1,4 @@
 ConsoleShowLog=true
 ConsoleShowLogEntrySource=false
-Debuglevel=5
+Debuglevel=0
 DefinitionFilename=resources/runtime/definition.adf
