@@ -22,7 +22,7 @@ public class CurveInfoDisplayController extends NGDisplayController {
         super.DoRender();
         FGC.setStroke(Color.BLACK);
         FGC.setFont(FTextFont);
-        FGC.strokeText(String.format("Position %.0f/%.0f", FMousePos.getX(), FMousePos.getY()), 670, 770);
+        FGC.strokeText(String.format("Position %.0f/%.0f", FMousePos.getX() * Scale, FMousePos.getY() * Scale), 670, 770);
     }
 
     public CurveInfoDisplayController(Canvas aCanvas) {
@@ -33,11 +33,14 @@ public class CurveInfoDisplayController extends NGDisplayController {
         super(aCanvas, aName);
         FMousePos = new NGPoint2D(0.0, 0.0);
         FTextFont = new Font("Arial", 12);
+        Scale = 1.0;
     }
 
     public void setMousePos(Double aX, Double aY) {
         FMousePos.setX(aX - FCanvas.getWidth() / 2);
         FMousePos.setY(FCanvas.getHeight() / 2 - aY);
     }
+
+    public Double Scale;
 
 }

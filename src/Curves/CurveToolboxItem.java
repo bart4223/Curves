@@ -5,6 +5,8 @@ import Uniwork.Appl.NGStageManager;
 import Uniwork.Misc.NGStrings;
 import javafx.stage.Stage;
 
+import java.util.EventObject;
+
 public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventListener {
 
     @Override
@@ -60,4 +62,10 @@ public class CurveToolboxItem extends NGCustomToolboxItem implements CurveEventL
     public void handleCurrentCurveChanged(CurveEvent e) {
 
     }
+
+    @Override
+    public void handleScaleChanged(EventObject e) {
+
+    }
+
 }

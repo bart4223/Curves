@@ -49,7 +49,10 @@ public class Curve2D extends CustomCurve {
     }
 
     public ArrayList<NGPoint2D> getPoints() {
-        return FPoints;
+        ArrayList<NGPoint2D> res = new ArrayList<NGPoint2D>();
+        for (NGPoint2D point : FPoints)
+            res.add(new NGPoint2D(point.getX() / FScale, point.getY() / FScale));
+        return res;
     }
 
     public void ClearPoints() {

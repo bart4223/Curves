@@ -42,3 +42,4 @@ Version history
     10.09.15    Runtime application definition added
     12.09.15    Add curve toolbox works
     14.09.15    Curve manager props toolbox
+    15.09.15    Scale works

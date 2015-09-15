@@ -4,6 +4,8 @@ import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Appl.NGStageManager;
 import javafx.stage.Stage;
 
+import java.util.EventObject;
+
 public class CurveStageItem extends NGCustomStageItem implements CurveEventListener {
 
     public CurveStageItem(NGStageManager aStageManager, String aName, Stage aStage) {
@@ -40,6 +42,12 @@ public class CurveStageItem extends NGCustomStageItem implements CurveEventListe
     @Override
     public void handleCurrentCurveChanged(CurveEvent e) {
 
+    }
+
+    @Override
+    public void handleScaleChanged(EventObject e) {
+        CurveStageController sc = (CurveStageController)FStageController;
+        sc.ScaleChanged((CurveManager)e.getSource());
     }
 
     public void ToggleGrid() {

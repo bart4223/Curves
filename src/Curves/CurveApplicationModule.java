@@ -42,6 +42,8 @@ public class CurveApplicationModule extends NGVisualApplicationModule {
         requestMethod.addParam("aID", NGObjectRequestParameter.ParamKind.String);
         requestMethod = registerObjectRequest("Curve", FCurveManager, "LineSize", "setAllCurveLineSize");
         requestMethod.addParam("aLineSize", NGObjectRequestParameter.ParamKind.Integer);
+        requestMethod = registerObjectRequest("Curve", FCurveManager, "Scale", "setAllCurveScale");
+        requestMethod.addParam("aScale", NGObjectRequestParameter.ParamKind.Double);
         registerObjectRequest("Curve", FCurveManager, "RemoveCurrent", "removeCurrentCurve");
         registerObjectRequest("CurveModule", this, "CurveToolbox", "ShowCurrentCurve");
         registerObjectRequest("CurveModule", this, "AddCurveToolbox", "AddCurve");

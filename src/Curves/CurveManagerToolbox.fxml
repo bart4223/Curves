@@ -16,5 +16,9 @@
             <Label text = "Grid" prefWidth="100" style="-fx-padding: 5px;"/>
             <Button id="btnGrid" prefWidth="100" text="Toggle" onAction="#handleGrid" fx:id="btnGrid" />
         </HBox>
+        <HBox prefWidth="200" xmlns:fx="http://javafx.com/fxml">
+            <Label text = "Scale" prefWidth="100" style="-fx-padding: 5px;"/>
+            <ComboBox id="cbScale" prefWidth="100" onAction="#handlecbScale" fx:id="cbScale" />
+        </HBox>
     </VBox>
 </AnchorPane>

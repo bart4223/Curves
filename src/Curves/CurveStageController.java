@@ -45,7 +45,7 @@ public class CurveStageController extends NGStageController {
         NGDisplayView dv = new NGDisplayView(Layer0.getWidth(), Layer0.getHeight());
         NGGrid2DDisplayController dcgrid = new NGGrid2DDisplayController(Layer0, "Grid");
         dcgrid.setView(dv);
-        dcgrid.GridDistance = 20;
+        dcgrid.GridDistance = 10;
         dcgrid.GridColor = Color.DARKGRAY;
         dcgrid.AlternateGridColor = getConfigurationPropertyAsBoolean("CurveApplicationModule.AlternateGridColor", false);
         registerDisplayController(dcgrid);
@@ -114,6 +114,12 @@ public class CurveStageController extends NGStageController {
         NGGrid2DDisplayController dcgrid = (NGGrid2DDisplayController)getDisplayController("Grid");
         dcgrid.DrawGrid = !dcgrid.DrawGrid;
         RenderScene(dcgrid);
+    }
+
+    public void ScaleChanged(CurveManager aCurveManager) {
+        CurveInfoDisplayController dcCI = (CurveInfoDisplayController)getDisplayController("CI");
+        dcCI.Scale = aCurveManager.getScale();
+        RenderScene(dcCI);
     }
 
 }

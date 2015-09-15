@@ -7,6 +7,7 @@ import Uniwork.Misc.NGLogManager;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.EventObject;
 
 public class CurveManager extends NGComponent {
 
@@ -28,7 +29,6 @@ public class CurveManager extends NGComponent {
         curve.setParameterValue("b", 0.0);
         curve.setParameterValue("c", 0.0);
         addCurve(curve);
-        //setAllCurveScale(0.1);
     }
 
     protected void BeginCalculateCurve(CustomCurve aCurve) {
@@ -111,6 +111,13 @@ public class CurveManager extends NGComponent {
         }
     }
 
+    protected synchronized void raiseScaleChangedEvent() {
+        EventObject event = new EventObject(this);
+        for (CurveEventListener listener : FEventListeners) {
+            listener.handleScaleChanged(event);
+        }
+    }
+
     protected CustomCurve getCurveByName(String aName) {
         for (CustomCurve curve : FCurves) {
             if (curve.getName().equals(aName)) {
@@ -168,6 +175,7 @@ public class CurveManager extends NGComponent {
 
     public void addCurve(CustomCurve aCurve) {
         aCurve.setLineSize(FCurveLineSize);
+        aCurve.setScale(FScale);
         FCurves.add(aCurve);
         writeInfo(String.format("Curve %s: Definition [%s -> %s] with solution procedures [%s] added", aCurve.getName(), aCurve.getFormula(), aCurve.getDefinition().getName(), aCurve.getSolutionProcedure().getSolveProblemsAsString()));
         raiseCurveAddedEvent(aCurve);
@@ -245,8 +253,13 @@ public class CurveManager extends NGComponent {
         FScale = aScale;
         for (CustomCurve curve : FCurves) {
             curve.setScale(FScale);
-            raiseCurveChangedEvent(curve);
+            CalculateCurve(curve);
         }
+        raiseScaleChangedEvent();
+    }
+
+    public Double getScale() {
+        return FScale;
     }
 
 }
