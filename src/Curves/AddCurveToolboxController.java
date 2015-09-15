@@ -2,6 +2,7 @@ package Curves;
 
 import Curves.Definitions.FirstDegreePolynomialFunctionDefinition;
 import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
+import Curves.Definitions.ThirdDegreePolynomialFunctionDefinition;
 import Uniwork.Appl.NGCustomStageItem;
 import Uniwork.Misc.NGLogEntry;
 import Uniwork.Misc.NGRandomGenerator;
@@ -141,6 +142,7 @@ public class AddCurveToolboxController extends NGToolboxController {
         super.DoInitialize();
         cbCurveDefs.getItems().add(FirstDegreePolynomialFunctionDefinition.class.getName());
         cbCurveDefs.getItems().add(SecondDegreePolynomialFunctionDefinition.class.getName());
+        cbCurveDefs.getItems().add(ThirdDegreePolynomialFunctionDefinition.class.getName());
     }
 
     public AddCurveToolboxController() {
