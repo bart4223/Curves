@@ -1,6 +1,5 @@
 package Curves;
 
-import Curves.Definitions.SecondDegreePolynomialFunctionDefinition;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
@@ -19,16 +18,6 @@ public class CurveManager extends NGComponent {
 
     protected void DoLoadCurves() {
         // ToDo load from curve composition
-        CustomCurve curve = new Curve2D(this, "Third", new SecondDegreePolynomialFunctionDefinition());
-        curve.addDefinitionArea("a", -10.0, 10.0);
-        curve.addDefinitionArea("b", -100.0, 100.0);
-        curve.addDefinitionArea("c", -400.0, 400.0);
-        curve.addDefinitionArea("x", -400.0, 400.0);
-        curve.setLineColor(Color.GREEN);
-        curve.setParameterValue("a", 0.25);
-        curve.setParameterValue("b", 0.0);
-        curve.setParameterValue("c", 0.0);
-        addCurve(curve);
     }
 
     protected void BeginCalculateCurve(CustomCurve aCurve) {
