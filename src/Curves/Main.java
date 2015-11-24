@@ -1,6 +1,7 @@
 package Curves;
 
 import Uniwork.Appl.NGApplication;
+import Uniwork.Appl.NGCustomApplicationModule;
 
 public class Main extends NGApplication {
 
@@ -29,7 +30,9 @@ public class Main extends NGApplication {
     }
 
     public void addCurveModule() {
-        addModule(CurveApplicationModule.class, true, String.format("%d", FModuleManager.getModuleCount()));
+        NGCustomApplicationModule module = addModule(CurveApplicationModule.class, false, String.format("%d", FModuleManager.getModuleCount()));
+        module.setDescription(String.format("%d", FModuleManager.getModuleCount() - 1));
+        module.Initialize();
     }
 
 }
