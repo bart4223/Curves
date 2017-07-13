@@ -2,8 +2,8 @@ package Curves;
 
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CurveParameterDefinition extends NGObject {
 
@@ -11,7 +11,7 @@ public class CurveParameterDefinition extends NGObject {
 
     protected String FName;
     protected String FDescription;
-    protected ArrayList<CurveParameterDefinitionArea> FDefintionAreas;
+    protected CopyOnWriteArrayList<CurveParameterDefinitionArea> FDefintionAreas;
     protected Kind FKind;
 
     public CurveParameterDefinition(Kind aKind, String aName) {
@@ -23,7 +23,7 @@ public class CurveParameterDefinition extends NGObject {
         FKind = aKind;
         FName = aName;
         FDescription = aDescription;
-        FDefintionAreas = new ArrayList<CurveParameterDefinitionArea>();
+        FDefintionAreas = new CopyOnWriteArrayList<CurveParameterDefinitionArea>();
     }
 
     public Kind getKind() {

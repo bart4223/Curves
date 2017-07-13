@@ -5,12 +5,12 @@ import Uniwork.Misc.NGLogEntry;
 import Uniwork.Misc.NGLogManager;
 import Uniwork.Misc.NGStrings;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class CustomCurveSolutionProcedure extends NGObject {
 
-    protected ArrayList<CurveProblemDefinition> FSolveProblems;
+    protected CopyOnWriteArrayList<CurveProblemDefinition> FSolveProblems;
     protected NGLogManager FLogManager;
 
     protected void writeInfo(String aInfo) {
@@ -77,7 +77,7 @@ public abstract class CustomCurveSolutionProcedure extends NGObject {
 
     public CustomCurveSolutionProcedure() {
         super();
-        FSolveProblems = new ArrayList<CurveProblemDefinition>();
+        FSolveProblems = new CopyOnWriteArrayList<CurveProblemDefinition>();
         FLogManager = null;
     }
 

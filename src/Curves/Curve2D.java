@@ -1,12 +1,12 @@
 package Curves;
 
 import Uniwork.Graphics.NGPoint2D;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Curve2D extends CustomCurve {
 
-    protected ArrayList<NGPoint2D> FPoints;
-    protected ArrayList<NGPoint2D> FPointsWithScale;
+    protected CopyOnWriteArrayList<NGPoint2D> FPoints;
+    protected CopyOnWriteArrayList<NGPoint2D> FPointsWithScale;
 
     @Override
     protected void BeforeInternalCalculate(String aProblemName) {
@@ -46,11 +46,11 @@ public class Curve2D extends CustomCurve {
 
     public Curve2D(CurveManager aCurveManager, String aName, CustomCurveDefinition aDefinition, CustomCurveSolutionProcedure aSolutionProcedure) {
         super(aCurveManager, aName, aDefinition, aSolutionProcedure);
-        FPoints = new ArrayList<NGPoint2D>();
-        FPointsWithScale = new ArrayList<NGPoint2D>();
+        FPoints = new CopyOnWriteArrayList<NGPoint2D>();
+        FPointsWithScale = new CopyOnWriteArrayList<NGPoint2D>();
     }
 
-    public ArrayList<NGPoint2D> getPointsWithScale() {
+    public CopyOnWriteArrayList<NGPoint2D> getPointsWithScale() {
         FPointsWithScale.clear();
         for (NGPoint2D point : FPoints)
             FPointsWithScale.add(new NGPoint2D(point.getX() / FScale, point.getY() / FScale));

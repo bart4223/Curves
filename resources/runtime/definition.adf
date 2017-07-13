@@ -2,7 +2,7 @@
 <java version="1.7.0_25" class="java.beans.XMLDecoder">
  <object class="Uniwork.Appl.NGApplicationDefinition">
   <void property="modules">
-   <object class="java.util.ArrayList">
+   <object class="java.util.concurrent.CopyOnWriteArrayList">
     <void method="add">
      <object class="Uniwork.Appl.NGApplicationModuleItemDefinition">
       <void property="className">

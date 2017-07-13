@@ -5,13 +5,13 @@ import Uniwork.Misc.NGLogEventListener;
 import Uniwork.Misc.NGLogManager;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CurveManager extends NGComponent {
 
-    protected ArrayList<CustomCurve> FCurves;
-    protected ArrayList<CurveEventListener> FEventListeners;
+    protected CopyOnWriteArrayList<CustomCurve> FCurves;
+    protected CopyOnWriteArrayList<CurveEventListener> FEventListeners;
     protected CustomCurve FCurrentCurve;
     protected Integer FCurveLineSize;
     protected Double FScale;
@@ -154,8 +154,8 @@ public class CurveManager extends NGComponent {
 
     public CurveManager(NGComponent aOwner, String aName) {
         super(aOwner, aName);
-        FCurves = new ArrayList<CustomCurve>();
-        FEventListeners = new ArrayList<CurveEventListener>();
+        FCurves = new CopyOnWriteArrayList<CustomCurve>();
+        FEventListeners = new CopyOnWriteArrayList<CurveEventListener>();
         FLogManager = new NGLogManager();
         FCurrentCurve = null;
         FCurveLineSize = 1;

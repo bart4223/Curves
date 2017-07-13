@@ -16,13 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AddCurveToolboxController extends NGToolboxController {
 
     protected Integer FStageSize = 800;
-    protected ArrayList<Control> FControls;
+    protected CopyOnWriteArrayList<Control> FControls;
 
     protected class SliderChangeListener implements ChangeListener {
 
@@ -151,7 +151,7 @@ public class AddCurveToolboxController extends NGToolboxController {
 
     public AddCurveToolboxController(NGCustomStageItem aStageItem) {
         super(aStageItem);
-        FControls = new ArrayList<Control>();
+        FControls = new CopyOnWriteArrayList<Control>();
     }
 
     public CurveManager CurveManager;

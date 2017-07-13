@@ -2,15 +2,15 @@ package Curves;
 
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class CustomCurveDefinition extends NGObject {
 
     protected String FName;
     protected String FDescription;
     protected String FFormula;
-    protected ArrayList<CurveParameterDefinition> FParameters;
+    protected CopyOnWriteArrayList<CurveParameterDefinition> FParameters;
 
     protected CurveParameterDefinition addParameter(CurveParameterDefinition.Kind aKind, String aName) {
         return addParameter(aKind, aName, "");
@@ -36,7 +36,7 @@ public abstract class CustomCurveDefinition extends NGObject {
         FName = aName;
         FDescription = aDescription;
         FFormula = aFormula;
-        FParameters = new ArrayList<CurveParameterDefinition>();
+        FParameters = new CopyOnWriteArrayList<CurveParameterDefinition>();
     }
 
     public String getName() {

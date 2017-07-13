@@ -10,8 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CurveToolboxController extends NGToolboxController {
 
@@ -66,7 +66,7 @@ public class CurveToolboxController extends NGToolboxController {
     @FXML
     private ColorPicker cpCurveColor;
 
-    protected ArrayList<Control> FControls;
+    protected CopyOnWriteArrayList<Control> FControls;
 
     protected CustomCurve FCurve;
 
@@ -114,7 +114,7 @@ public class CurveToolboxController extends NGToolboxController {
 
     public CurveToolboxController(NGCustomStageItem aStageItem) {
         super(aStageItem);
-        FControls = new ArrayList<Control>();
+        FControls = new CopyOnWriteArrayList<Control>();
     }
 
     public void setContext(CustomCurve aCurve) {
