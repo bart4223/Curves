@@ -11,6 +11,7 @@ public class MainStageItem extends NGCustomStageItem {
         FFXMLName = "MainStage.fxml";
         FWidth = 500;
         FHeight = 50;
+        FIsPrimary = true;
     }
 
 }
